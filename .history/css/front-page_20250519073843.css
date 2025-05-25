@@ -1,0 +1,69 @@
+/*----------------*/
+header{
+    background-color: cadetblue;
+}
+
+/*-------ヘッダーリストを横並びにする---------*/
+header nav ul{
+    display: flex;
+    justify-content:space-around;
+}
+
+/*-------トップページの画像---------*/
+#hero img{
+    width: 100%;
+}
+
+/*-------トップページの文章---------*/
+#about{
+    background-color: antiquewhite;
+}
+
+/*-------wp投稿ループ文---------*/
+.articles_container{
+    padding: 50px 0;
+}
+
+.articles {
+  padding: 50px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-rows: 350px; /* 高さを揃えたい場合 */
+  gap: 20px; /* カラム間と行間の隙間 */
+  max-width: 1350px; /* 3列 × 450px分の最大幅 */
+  margin: 0 auto; /* 中央寄せ */
+}
+
+.img{
+    max-width: 100%; 
+    height: auto;
+}
+
+
+.add{/*page.php固定ページ用*/
+    border: 1px solid black;
+    padding: 100px 0;
+
+}
+
+p.nothing img{/*サムネイル画像がないときの表示(index.phpのif判定)用*/
+     width: 400px;
+     height: 200px;
+}
+
+.sub-articles_container{/*サブループ*/
+    padding: 50px 0;
+}
+
+.works-articles{/*サブループを三列カラムで並べる*/
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-rows: 350px; /* 高さを揃えたい場合 */
+  gap: 20px; /* カラム間と行間の隙間 */
+  max-width: 1350px; /* 3列 × 450px分の最大幅 */
+  margin: 0 auto; /* 中央寄せ */
+}
+
+
+
+

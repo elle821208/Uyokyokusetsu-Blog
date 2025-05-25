@@ -1,0 +1,64 @@
+/*----------------*/
+header{
+    background-color: cadetblue;
+}
+
+/*-------ヘッダーリストを横並びにする---------*/
+header nav ul{
+    display: flex;
+    justify-content:space-around;
+}
+
+/*-------トップページの画像---------*/
+#hero img{
+    width: 100%;
+}
+
+/*-------トップページの文章---------*/
+#about{
+    background-color: antiquewhite;
+}
+
+#information{/*-------投稿、メインループ、サブループ---------*/
+    padding: 50px 0;
+
+}
+
+/*-------wp投稿ループ文---------*/
+.articles{
+    display: grid;
+    grid-template-columns: 450px 450px 450px;/*--3列--*/
+    grid-template-rows: 350px 350px;/*--2行--*/
+}
+
+
+
+
+
+
+
+.list_link{/*--ニュース投稿一覧--*/
+    padding: 30px 0;
+
+}
+
+.add{/*page.php固定ページ用*/
+    border: 1px solid black;
+    padding: 100px 0;
+
+}
+
+p.nothing img{/*サムネイル画像がないときの表示(index.phpのif判定)用*/
+     width: 400px;
+     height: 200px;
+}
+
+.works-articles{/*サブループを三列カラムで並べる*/
+    display: grid;
+    grid-template-columns: 450px 450px 450px;/*--3列--*/
+    grid-template-rows: 350px 350px;/*--2行--*/
+}
+
+
+
+
