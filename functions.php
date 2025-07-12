@@ -1,147 +1,163 @@
 <?php
-//※※※↑↑↑functions.phpトップの<?phpより上にはコメントを書かないこと(エラーの原因になる)_！
-//index.phpでサムネイル（アイキャッチ）を読み込むときの設定。
-add_theme_support('post-thumbnails');/*index.phpのループ文のthumbnail用とこれでwpのサムネイル画像を読み込む*/
-add_image_size('post-thumbnails',400,200,true);/*サムネイル画像のサイズを指定する。post-thumbnailsはsがいる*/
+//※※※↑↑↑functions.phpトップの<?phpより上にはコメントを書かないこと(エラーの原因になる)！※※※
 
+// ------------------------------------------
+// サムネイル画像（アイキャッチ）を使う設定
+// ------------------------------------------
+add_theme_support('post-thumbnails'); 
+// → ダッシュボードの投稿・固定ページ編集画面に「アイキャッチ画像」欄が表示される
+// → 表示対象ファイル：index.php、archive.php、single.php などでサムネイルが使える
 
-//ブラウザのタブに WPサイトタブタイトル（wpの一般設定より）をheader.phpでを読み込む時の設定
-function titles()
-{
-$title = wp_title(' | ',true,'right');
-if  (is_home()) {
-//トップページ(Homeページ)のときは
-//紆余トップ(functions.phpで設定) |曲折を表示
-echo'①紆余曲折 |トップ ';
-}else{
-//トップページ(Homeページ)以外は下記を表示
-//$title(wp固定ページタイトル)にサイト名を足したものを使う
-    echo $title.'サイト名';
+add_image_size('post-thumbnails', 400, 200, true); 
+// → 自動生成される画像サイズ（記事一覧などで使う可能性あり）
+
+add_image_size('custom-thumb', 640, 360, true); 
+// → 独自サイズ。使いたいテンプレートで呼び出せる（例：一覧ページ、カスタムテンプレートなど）
+
+// ------------------------------------------
+// ブラウザのタブに表示されるタイトルをカスタマイズ
+// ------------------------------------------
+// ------------------------------------------
+// 【機能名】ブラウザのタブに表示されるタイトルを設定する関数
+// ------------------------------------------
+// 【対象ファイル】functions.php
+// 【影響するページ】header.php（<title>タグ）にこの関数が使われている場合、すべてのページに影響する
+//                   例：トップページ、カテゴリー一覧ページ、投稿ページなど
+
+function titles() {
+    // 現在のページタイトルを取得する（WordPressが自動生成）
+    $title = wp_title(' | ', true, 'right');
+
+    if (is_home()) {
+        // ▼トップページの場合 → 「①紆余曲折 | トップ」と表示される
+        echo '①紆余曲折 |トップ ';
+    } elseif (is_category()) {
+        // ▼カテゴリー一覧ページ（例：/category/mindset）なら
+        //    表示中のカテゴリー名をタイトルとして表示（例：「mindset | サイト名」）
+        single_cat_title(); // カテゴリー名だけを出力
+        echo ' | サイト名';
+    } else {
+        // ▼それ以外のページ（個別記事、固定ページなど）なら
+        //    WordPressが自動生成したタイトルに「サイト名」を加える
+        echo $title . 'サイト名';
+    }
 }
-};
 
 
+// ------------------------------------------
+// 投稿（post）タイプのアーカイブURLを「/blog」に変更
+// ------------------------------------------
+function post_has_archive($args, $post_type) {
+    if ('post' === $post_type) {
+        $args['rewrite'] = true;
+        $args['has_archive'] = 'blog'; 
+        // → 「投稿（post）」のアーカイブページが /blog でアクセスできるようになる
+        // → 関連テンプレート：archive.php または archive-news.php（あれば）
 
-///※※ダッシュボードに「ニュース」のアーカイブurl作成
-///https://www.youtube.com/watch?v=y9kvRWu8rE4  
-///  ↑↑↑動画 デモ付き！WordPressの使い方を根本的に理解するための仕組み解説！28:42-->
-function post_has_archive($args,$post_type){///← post_has_archiveがフック
-    if('post'==$post_type){
-        $args['rewrite']=true;
-        $args['has_archive']='news';///← アーカイブページの設定。スラッグは'news'   
-        $args['label']='雑記ブログ一覧';
+        $args['label'] = '雑記ブログ一覧'; 
+        // → ダッシュボードの「投稿」ラベルが「雑記ブログ一覧」に変わる
     }
     return $args;
 }
-add_filter('register_post_type_args','post_has_archive',10,2);
+add_filter('register_post_type_args', 'post_has_archive', 10, 2);
 
+// ------------------------------------------
+// トップページの投稿件数を変更（ニュース＝雑記投稿）
+//–------------------------------------------
+function news_posts_per_page($query) {
+    if (is_admin() || !$query->is_main_query()) return;
 
-
-
-//投稿のメインクエリ「ニュース」のトップページでの表示件数の変更
-//wpの設定→表示設定の「1ページに表示する最大投稿数」を設定する
-//https://keimarublog.com/post-count-template/ ← 投稿の表示件数についての参考サイト
-//https://komaricote.com/wordpress/pre_get_posts/  ←  pre_get_postsについての参考サイト
-
-
-function news_posts_per_page($query)//第二引数news_posts_per_pageの内容を登録する。ニュースの投稿の表示件数、変数$Query（現在のクエリ、メインループ）
-{
-    //if文
-    if (is_admin() || !$query->is_main_query()) {//もし管理画面を表示しているとき、もしくは変数$Query（現在のクエリ、メインループ）がメインクエリでなければデフォルトの状態のまま返すという処理
-        return;
-    }
-    if ($query->is_front_page()) {//もしトップページ（is_front_page）の場合
-        $query->set('posts_per_page', '12');//「表示件数を最大○○件にする」
-        //$query->set() で「クエリを→セットする」という意味、('posts_per_page', 3);で「表示件数を最大3件にする」という意味
+    if ($query->is_front_page()) {
+        $query->set('posts_per_page', 12); 
+        // → トップページ（front-page.php または index.php）での投稿表示件数が12件に制限される
     }
 }
-add_action('pre_get_posts', 'news_posts_per_page');//フックpre_get_postsでデフォルトのwordpressのメインループ（変数$Query）の投稿件数10件を変更させた。
-//「投稿を取得する前」のタイミングで「ニュースの投稿の表示件数」を上記のif文の通りに分岐させ実行させる。
-//アクションフックadd_action() を使って第一引数のタイミングで第二引数を実行させる。
-//この例では第一引数の pre_get_posts で「投稿を取得する前」をタイミングに指定し、第二引数の news_posts_per_page で「ニュースの投稿の表示件数」となります。
-//pre_get_posts はWordPressがアクセスしたURLをもとに、メインクエリで投稿を取得する前に処理を行いたいときに使うアクションフックというものです。
+add_action('pre_get_posts', 'news_posts_per_page');
 
-
-
-
-
-/* ----------wpのダッシュボードに新規の投稿一覧「tech(技術ブログ一覧)」 カスタム投稿タイプ、サブループを追加 ---------- */
-//https://wordpress-web.and-ha.com/summary-add-custom-post-type/ ← カスタム投稿タイプの参考サイト
-
+// ------------------------------------------
+// カスタム投稿タイプ「works（ダッシュボードの技術ブログ一覧）」を登録
+// ------------------------------------------
 function cpy_register_works() {
     $labels = [
-      'singular_name' => 'tech',//投稿タイプの表示名
-      'edit_name' => 'tech',
-      ];
-      
+        'singular_name' => 'tech',
+        'edit_name'     => 'tech',
+    ];
 
     $args = [
-      'label' => '技術ブログ一覧', // 管理画面上の表示（日本語でもOK）
-      'labels' =>$labels,
-      'description' =>"",
-      'public' => true, // 管理画面に表示するかどうかの指定
-      'show_in_rest' => true, // Gutenbergの有効化
-      'rest_base' =>"",
-      'rest_controller_class' =>"WP_REST_Posts_Controller",
-      'has_archive' => true, // 投稿した記事の一覧ページを作成する
-      'delete_with_user' =>false,
-      'excluded_from_search' =>false,
-      'map_meta_cap' =>true,
-      'hierarchical' => true, // 階層構造を持つかどうか
-      'rewrite' =>["slug" =>"works","with_front"=>true],// 
-      'query_var'=>true,
-      'menu_position' => 5, // 管理画面メニューの表示位置（投稿の下に追加）
-      'supports' => ['title',  'editor', 'thumbnail'],
+        'label'               => '技術ブログ一覧', 
+        // → ダッシュボードのメニューに「技術ブログ一覧」として表示される
+
+        'labels'              => $labels,
+        'public'              => true,
+        'show_in_rest'        => true, 
+        // → ブロックエディタ対応。REST API で操作も可能
+
+        'has_archive'         => true, 
+        // → アーカイブページ（/works）で一覧表示される
+        // → 使用テンプレート：archive-works.php（存在すれば優先）
+
+        'hierarchical'        => true, 
+        // → 固定ページのように親子関係をダッシュボードで設定できる
+
+        'rewrite'             => ['slug' => 'works', 'with_front' => true], 
+        // → アーカイブURLが /works に固定される
+
+        'menu_position'       => 5, 
+        // → ダッシュボード左メニューの上部（投稿の下）に表示される
+
+        'supports'            => ['title', 'editor', 'thumbnail'], 
+        // → ダッシュボード編集画面でタイトル、本文、アイキャッチ画像を入力可能
     ];
-    register_post_type('works',$args); //カスタム投稿タイプ名（半角英数字の小文字）
+    register_post_type('works', $args); 
+    // → カスタム投稿タイプ「works」がテーマと管理画面に登録される
 }
-add_action( 'init', 'cpy_register_works' );
+add_action('init', 'cpy_register_works');
 
-
-
-//chatgtpより2025_05_19
- add_theme_support('post-thumbnails'); // サムネイル有効化
-
-// 独自サイズの登録（必要なら）
-add_image_size('custom-thumb', 640, 360, true); // 幅640×高さ360、トリミングあり
-
-
-
-//2025-05-22 chatgptより サブループ（技術ブログ）の表示件数を変更
+// ------------------------------------------
+// カスタム投稿タイプ「works」のアーカイブ（archive-works.php）表示件数を設定（12件）
+//–------------------------------------------
 function custom_works_posts_per_page($query) {
-    // 管理画面、またはメインクエリでない場合は何もしない
-    if (is_admin() || !$query->is_main_query()) {
-        return;
-    }
+    if (is_admin() || !$query->is_main_query()) return;
 
-    // 「works」のアーカイブページ（一覧ページ）なら、12件表示に変更
     if ($query->is_post_type_archive('works')) {
-        $query->set('posts_per_page', 12);
+        $query->set('posts_per_page', 12); 
+        // → /works にアクセスした際の一覧表示件数が12件に制限される
+        // → 使用ファイル：archive-works.php（存在すれば）、なければ archive.php
     }
 }
 add_action('pre_get_posts', 'custom_works_posts_per_page');
 
-
-//2025-05-23chatgptより メインループ（雑記）の一部をサブループ（技術）に移す
+// ------------------------------------------
+// フロントページで「雑記（category: zakki）」のみを表示（メインループ制御）
+// ------------------------------------------
 function filter_main_query_for_front($query) {
-    if (is_admin() || !$query->is_main_query()) {
-        return;
-    }
+    if (is_admin() || !$query->is_main_query()) return;
 
     if (is_front_page()) {
-        $query->set('category_name', 'zakki'); // ← 雑記ブログのスラッグに変更
+        $query->set('category_name', 'zakki'); 
+        // → トップページ（front-page.php または index.php）で「zakki」カテゴリ投稿のみ表示
+        // → その他カテゴリの投稿はトップには表示されない
     }
 }
 add_action('pre_get_posts', 'filter_main_query_for_front');
 
 
+// ------------------------------------------
+// 【機能名】月別アーカイブをカテゴリで絞り込む（例：/2025/07/?cat=zakki）
+// ------------------------------------------
+// ▼ 月アーカイブページにアクセスし、「?cat=〇〇」がURLについていたら、
+//    そのカテゴリの投稿だけを表示するようにする処理です。
 
+// 【対象ファイル】functions.php
+// 【影響ページ】年月アーカイブ（例：/2025/07/?cat=zakki）での表示内容
 
-
-
-
-
-
-
+function filter_monthly_archive_by_category($query) {
+    // 管理画面ではなく、メインクエリ（表示用メインの問い合わせ）であることを確認
+    if (!is_admin() && $query->is_main_query() && is_date() && isset($_GET['cat'])) {
+        // URLに含まれるカテゴリ名（例：zakki）で投稿を絞り込み
+        $query->set('category_name', sanitize_text_field($_GET['cat']));
+    }
+}
+add_action('pre_get_posts', 'filter_monthly_archive_by_category');
 
 

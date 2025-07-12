@@ -275,6 +275,61 @@ p.nothing img{/*サムネイル画像がないときの表示(index.phpのif判�
 }
 
 
+/*----------------------------------
+  フッター全体のデザイン
+----------------------------------*/
+.site-footer {
+  background-color: #f2f2f2;
+  padding: 40px 20px;
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #555;
+  text-align: center;
+  border-top: 1px solid #ddd;
+}
+
+.footer-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* フッターナビ */
+.footer-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.footer-nav li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.footer-nav li a:hover {
+  color: #0073aa;
+}
+
+/* コピーライト */
+.copyright small {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* スマホ対応 */
+@media (max-width: 600px) {
+  .footer-nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+
+
 
 
 
