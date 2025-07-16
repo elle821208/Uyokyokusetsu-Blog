@@ -57,22 +57,35 @@
       </ul>
     </section>
 
-        <!-- ▼雑記ブログ用：月別アーカイブ表示エリア -->
+    <!-- ▼雑記ブログ用：月別アーカイブ表示エリア -->
     <section class="sidebar-section">
       <h2 class="sidebar-title">雑記ブログアーカイブ（月別）</h2>
       <ul class="sidebar-list">
         <?php
         global $wpdb; // WordPressのデータベースにアクセスするための変数
 
-        // ▼現在表示中のカテゴリ情報を取得（例: /category/mindset にアクセスしているとき）
+        /*
+         * ▼現在表示中のカテゴリ情報を取得（例: /category/mindset にアクセスしているとき）
+         * ▼get_queried_object() は現在のページの情報をオブジェクト形式で返す
+         */
         $current_category = get_queried_object();
-        $category_id = '';
+        $category_id = ''; // 初期化：カテゴリIDがまだ無い状態
 
         if ($current_category && isset($current_category->term_id)) {
+          // ▼現在のカテゴリIDを取得（例：mindsetのID＝3など）
           $category_id = $current_category->term_id;
+          /*
+           * ▼この変数（$category_id）はURL生成で使用される
+           * ▼影響ページ：カテゴリページで月別リンクを生成する際の絞り込みに使用
+           */
         }
 
-        // ▼techカテゴリ以外の通常投稿から年月を取得
+        /*
+         * ▼投稿タイプ "post"（通常の投稿）から tech カテゴリ以外の投稿の年月を取得するSQL
+         * ▼DISTINCT で重複を除外し、最新から順に並べ替え
+         * ▼影響ファイル：sidebar.php
+         * ▼影響ページ：雑記ブログの各ページ（index.php, category.php, single.phpなど）
+         */
         $months = $wpdb->get_results("
           SELECT DISTINCT YEAR(p.post_date) AS year, MONTH(p.post_date) AS month
           FROM $wpdb->posts p
@@ -88,22 +101,24 @@
 
         // ▼年月ごとにリンクを出力
         foreach ($months as $month) {
-          $year = $month->year;
-          $mon  = sprintf('%02d', $month->month);
+  $year = $month->year;                  // 2025みたいな年の数字を取り出す
+  $mon  = sprintf('%02d', $month->month); // 月の数字（1 → 01など）を2ケタにする
 
-          if ($category_id) {
-            $link = get_category_link($category_id) . '?year=' . $year . '&monthnum=' . $mon;
-          } else {
-            $link = get_month_link($year, $mon);            
-          }
+  if ($category_id) {
+    // カテゴリページにいるとき → カテゴリを保ったまま、月でしぼるリンクを作る
+    $link = get_category_link($category_id) . '?year=' . $year . '&monthnum=' . $mon;
+  } else {
+    // 普通の月別アーカイブ（カテゴリなし）
+    $link = get_month_link($year, $mon);            
+  }
 
-          // ▼◎◎年〇〇月の雑記ブログ というリンク表示に変更
-          echo '<li><a href="' . esc_url($link) . '">' . esc_html($year . '年' . $mon . '月の雑記ブログ') . '</a></li>';
-        }
+  // 出来上がったリンクを、HTMLのリストとして画面に出す
+  echo '<li><a href="' . esc_url($link) . '">' . esc_html($year . '年' . $mon . '月') . '</a></li>';
+}
+
         ?>
-      </ul>     
+      </ul>
     </section>
-
 
   <?php else : ?>
 

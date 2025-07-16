@@ -25,7 +25,7 @@
                 <li><a href="<?php echo home_url(); ?>">ホーム</a></li>
                 <li><a href="<?php echo home_url('/profile'); ?>">プロフィール</a></li>
                 <li><a href="<?php echo home_url('/contact'); ?>">お問い合わせ</a></li>
-                <li><a href="<?php echo home_url('/blog'); ?>">雑記ブログ一覧</a></li>
+                <li><a href="<?php echo home_url('/'); ?>">雑記ブログ一覧</a></li>
                 <li><a href="<?php echo home_url('/works'); ?>">技術ブログ一覧</a></li>
             </ul>
         </nav>

@@ -101,7 +101,7 @@
           echo '<li><a href="' . esc_url($link) . '">' . esc_html($year . '年' . $mon . '月の雑記ブログ') . '</a></li>';
         }
         ?>
-      </ul>     
+      </ul>
     </section>
 
 

@@ -57,22 +57,35 @@
       </ul>
     </section>
 
-        <!-- ▼雑記ブログ用：月別アーカイブ表示エリア -->
+    <!-- ▼雑記ブログ用：月別アーカイブ表示エリア -->
     <section class="sidebar-section">
       <h2 class="sidebar-title">雑記ブログアーカイブ（月別）</h2>
       <ul class="sidebar-list">
         <?php
         global $wpdb; // WordPressのデータベースにアクセスするための変数
 
-        // ▼現在表示中のカテゴリ情報を取得（例: /category/mindset にアクセスしているとき）
+        /*
+         * ▼現在表示中のカテゴリ情報を取得（例: /category/mindset にアクセスしているとき）
+         * ▼get_queried_object() は現在のページの情報をオブジェクト形式で返す
+         */
         $current_category = get_queried_object();
-        $category_id = '';
+        $category_id = ''; // 初期化：カテゴリIDがまだ無い状態
 
         if ($current_category && isset($current_category->term_id)) {
+          // ▼現在のカテゴリIDを取得（例：mindsetのID＝3など）
           $category_id = $current_category->term_id;
+          /*
+           * ▼この変数（$category_id）はURL生成で使用される
+           * ▼影響ページ：カテゴリページで月別リンクを生成する際の絞り込みに使用
+           */
         }
 
-        // ▼techカテゴリ以外の通常投稿から年月を取得
+        /*
+         * ▼投稿タイプ "post"（通常の投稿）から tech カテゴリ以外の投稿の年月を取得するSQL
+         * ▼DISTINCT で重複を除外し、最新から順に並べ替え
+         * ▼影響ファイル：sidebar.php
+         * ▼影響ページ：雑記ブログの各ページ（index.php, category.php, single.phpなど）
+         */
         $months = $wpdb->get_results("
           SELECT DISTINCT YEAR(p.post_date) AS year, MONTH(p.post_date) AS month
           FROM $wpdb->posts p
@@ -88,22 +101,25 @@
 
         // ▼年月ごとにリンクを出力
         foreach ($months as $month) {
-          $year = $month->year;
-          $mon  = sprintf('%02d', $month->month);
+          $year = $month->year;                       // 例：2025
+          $mon  = sprintf('%02d', $month->month);     // 例：07
 
+          /*
+           * ▼リンク生成：
+           *   - カテゴリページの場合：そのカテゴリに絞り込んだ月別リンク（例: /category/mindset/?m=202507）
+           *   - カテゴリページでない場合：通常の年月アーカイブ（例: /2025/07/）
+           */
           if ($category_id) {
-            $link = get_category_link($category_id) . '?year=' . $year . '&monthnum=' . $mon;
+            $link = get_category_link($category_id) . '?m=' . $year . $mon;
           } else {
-            $link = get_month_link($year, $mon);            
+            $link = get_month_link($year, $mon);
           }
 
-          // ▼◎◎年〇〇月の雑記ブログ というリンク表示に変更
-          echo '<li><a href="' . esc_url($link) . '">' . esc_html($year . '年' . $mon . '月の雑記ブログ') . '</a></li>';
+          echo '<li><a href="' . esc_url($link) . '">' . esc_html($year . '年' . $mon . '月') . '</a></li>';
         }
         ?>
-      </ul>     
+      </ul>
     </section>
-
 
   <?php else : ?>
 
@@ -135,52 +151,27 @@
     <section class="sidebar-section">
       <h2 class="sidebar-title">技術ブログアーカイブ（月別）</h2>
       <ul class="sidebar-list">
-       <?php
-// ▼【役割】このブロックは、技術ブログ（カスタム投稿タイプ "works"）の
-// 公開済み記事の「年月別アーカイブリンク一覧」を作るためのコードです。
+        <?php
+        global $wpdb;
 
-// ▼【関数】global $wpdb;
-// WordPressのデータベースに直接アクセスするために必要な特別なオブジェクトを使います。
-// この $wpdb は WordPress の中の SQL 実行などを行うためのものです。
-global $wpdb;
+        // ▼技術ブログ（投稿タイプ works）の中で、公開済みの年月を取得
+        $months = $wpdb->get_results("
+          SELECT DISTINCT YEAR(post_date) AS year, MONTH(post_date) AS month
+          FROM $wpdb->posts
+          WHERE post_type = 'works' AND post_status = 'publish'
+          ORDER BY post_date DESC
+        ");
 
-// ▼【SQLを実行】$wpdb->get_results()
-// 技術ブログ（投稿タイプ: works）から、投稿された「年」と「月」の一覧を取得します。
-// 重複しないように DISTINCT を使い、最新の年月が上に来るように ORDER BY で並べています。
-$months = $wpdb->get_results("
-  SELECT DISTINCT
-    YEAR(post_date) AS year,   -- 投稿された年を取得（例：2025）
-    MONTH(post_date) AS month  -- 投稿された月を取得（例：7）
-  FROM
-    $wpdb->posts               -- 投稿データが格納されているテーブルを対象にする
-  WHERE
-    post_type = 'works'        -- 投稿タイプが「works」（＝技術ブログ）であること
-    AND post_status = 'publish'-- 公開済みの記事だけを対象にする
-  ORDER BY
-    post_date DESC             -- 新しい年月から順番に並べる
-");
+        foreach ($months as $month) {
+          $year = $month->year;
+          $mon  = sprintf('%02d', $month->month);
 
-// ▼【foreach文】$months に入っている各「年月」データに対して、1件ずつ処理します
-foreach ($months as $month) {
-  // ▼$month->year：SQLで取得した年（例：2025）
-  $year = $month->year;
+          // ▼年月ごとにアーカイブリンクを生成（例: /works?w_year=2025&w_month=07）
+          $url  = get_post_type_archive_link('works') . '?w_year=' . $year . '&w_month=' . $mon;
 
-  // ▼$month->month：SQLで取得した月（例：7）を2桁に整形（例：07）
-  // sprintf('%02d', 7) → 07 というように、必ず2桁で表示させます
-  $mon  = sprintf('%02d', $month->month);
-
-  // ▼get_post_type_archive_link()：投稿タイプ（ここでは "works"）の一覧ページのURLを取得
-  // 例：/works
-  // ▼その後ろに「?w_year=2025&w_month=07」というクエリパラメータをつけて、月ごとに絞り込めるようにします
-  // 例：/works?w_year=2025&w_month=07
-  $url  = get_post_type_archive_link('works') . '?w_year=' . $year . '&w_month=' . $mon;
-
-  // ▼HTMLとして、年月ごとのリンク（例：2025年07月）をリストとして出力します
-  // esc_url() → URLを安全な形に整形してくれるWordPressの関数
-  // esc_html() → 文字列を安全に表示してくれる関数（HTMLタグとして解釈されないようにする）
-  echo '<li><a href="' . esc_url($url) . '">' . esc_html($year . '年' . $mon . '月') . '</a></li>';
-}
-?>
+          echo '<li><a href="' . esc_url($url) . '">' . esc_html($year . '年' . $mon . '月') . '</a></li>';
+        }
+        ?>
       </ul>
     </section>
 

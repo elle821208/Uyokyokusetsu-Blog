@@ -55,7 +55,6 @@ get_header(); // サイトのヘッダー部分を読み込む（header.phpを�
           echo '<span style="color: green;">[カスタム投稿：works]</span>';
         }
         ?>
-        
       </div>
     <?php endwhile; else : ?>
       <!-- ▼投稿が見つからない場合の表示 -->
