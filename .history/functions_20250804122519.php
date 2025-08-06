@@ -142,29 +142,23 @@ add_action('pre_get_posts', 'filter_archive_by_category_and_date');
 
 
 
-
-// =============================================
-// Prism.js を読み込むための設定（functions.php）
-// =============================================
-
+// Prism.js を読み込むためのコード（CDNを使ってるよ）
 function add_prismjs_to_theme() {
-  // Prism.js の CSS（見た目のスタイル）を読み込む
+  // Prism.js の CSS（見た目のデザイン）を読み込む
   wp_enqueue_style(
-    'prismjs-css', // スタイルの名前（自由に変更可）
-    'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css' // CDNのURL（外部の倉庫）
+    'prismjs-css',
+    'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css'
   );
 
-  // Prism.js の JavaScript（コードを色付けする仕組み）を読み込む
+  // Prism.js の JavaScript（コードを色づけする仕組み）を読み込む
   wp_enqueue_script(
-    'prismjs-js', // スクリプトの名前（自由に変更可）
-    'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js', // CDNのURL
-    array(),  // 依存するスクリプト（なし）
-    null,     // バージョン番号（自動）
-    true      // 読み込み位置：trueはHTMLの一番下（速くなる）
+    'prismjs-js',
+    'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js',
+    array(), // 依存関係なし
+    null,    // バージョン指定なし
+    true     // フッターで読み込む（表示速度が速くなる）
   );
 }
 
-// WordPress に「この関数を使ってね！」と登録する
+// WordPress に「この関数を使ってね！」と教える
 add_action('wp_enqueue_scripts', 'add_prismjs_to_theme');
-?>
-

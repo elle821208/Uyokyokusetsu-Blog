@@ -142,7 +142,7 @@ add_action('pre_get_posts', 'filter_archive_by_category_and_date');
 
 
 
-
+<?php
 // =============================================
 // Prism.js を読み込むための設定（functions.php）
 // =============================================
