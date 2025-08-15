@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/reset.css"><!--cssが読み込まれないときは検証ツールを開いてリロードボタン長押し。「キャッシュの消去とハード再読み込み」をする-->
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/common.css">
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/front-page.css">
-    <?php wp_head(); ?><!--headが終わる前に入れる-->
+    <meta name="google-site-verification" content="H-3Ecx1C-TWXLPBhOI9UAVii1r5e9Mt2u5WMYh7UKxA" />
+    <!--↑↑↑ サーチコンソールの所有権確認用。headが終わる前に入れる-->
+    <?php wp_head(); ?><!--headが終わる前に入れる-->    
 </head>
 
 <body <?php body_class(); ?>><!--bodyにページごとに違うクラスを全部つけてくれる -->
