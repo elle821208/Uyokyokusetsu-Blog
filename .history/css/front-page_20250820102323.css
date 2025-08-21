@@ -15,25 +15,7 @@ header {
 }
 
 
-/*------------------------------
-ヘッダーサイトタイトル中央表示・大型化
-------------------------------*/
-header .site-title {
-    text-align: center;          /* 中央揃え */
-    font-size: 2.5rem;           /* 大きめサイズ。必要に応じて調整 */
-    font-weight: bold;            /* 太字 */
-    margin: 16px 0;               /* 上下の余白 */
-    color: #0073aa;               /* お好みの色 */
-    font-family: 'Helvetica Neue', 'Noto Sans JP', sans-serif;
-}
 
-/* スマホ表示では少し小さく調整 */
-@media (max-width: 768px) {
-    header .site-title {
-        font-size: 2rem;
-        margin: 12px 0;
-    }
-}
 
 /*-------ヘッダーリストを横並びにする---------*/
 header nav {

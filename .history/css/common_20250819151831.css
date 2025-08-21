@@ -38,17 +38,5 @@ body {
 }
 
 
-/* 共通の本文ラッパー */
-.content-wrapper {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 16px;
-  font-size: 14px;
-  line-height: 1.8;
-  color: #333;
-  font-family: 'Noto Sans JP', sans-serif;
-}
-
-
 
 

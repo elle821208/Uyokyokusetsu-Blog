@@ -12,9 +12,9 @@
         <?php the_content(); ?>
     </section>
 
-    <!-- CTAや注意書きの共通パーツを呼び出し -->
-    <?php get_template_part('template-parts/content', 'cta'); ?>
-
+    <section>
+        （※wpのニュース投稿一覧の下部）全ページ表示したい広告を入れる場所CTA(vscodeのsingle.php)
+    </section>
 </main>
 
 <?php get_footer(); ?>
