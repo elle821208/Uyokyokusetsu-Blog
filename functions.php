@@ -166,5 +166,36 @@ function add_prismjs_to_theme() {
 
 // WordPress に「この関数を使ってね！」と登録する
 add_action('wp_enqueue_scripts', 'add_prismjs_to_theme');
+
+
+
+
+
+
+// ==============================
+// コードコピー機能のJS/CSSを読み込み
+// ==============================
+function uyokyokusetsu_enqueue_copy_code_assets() {
+    // JSを読み込み（テーマの/js/copy-code.js）
+    wp_enqueue_script(
+        'copy-code',
+        get_template_directory_uri() . '/js/copy-code.js',
+        array(),
+        null,
+        true // フッターで読み込む
+    );
+
+    // CSSを読み込み（テーマの/css/copy-code.css）
+    wp_enqueue_style(
+        'copy-code-style',
+        get_template_directory_uri() . '/css/copy-code.css'
+    );
+}
+add_action('wp_enqueue_scripts', 'uyokyokusetsu_enqueue_copy_code_assets');
+
+
+
 ?>
+
+
 

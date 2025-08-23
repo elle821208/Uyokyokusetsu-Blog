@@ -1,0 +1,106 @@
+/* ===============================
+   コードを入れる箱（ラッパー）
+   コピー用ボタンの位置もここで調整
+   =============================== */
+.code-wrapper {
+  position: relative;      /* 子要素のコピー用ボタンの位置を基準にする */
+  margin-bottom: 1.5em;    /* 下に余白をつけて文章とくっつかないようにする */
+}
+
+/* ===============================
+   コード全体のフォント・背景・フラット表示
+   pre と code の両方に適用
+   =============================== */
+.code-wrapper pre,
+.code-wrapper code,
+pre[class*="language-"],
+code[class*="language-"] {
+  font-family: "Fira Code", Consolas, Monaco, 'Courier New', monospace !important;
+  /* プログラム用の読みやすい等幅フォント */
+
+  font-size: 16px !important;       /* 少し大きめにして見やすく */
+  line-height: 1.65 !important;     /* 文字消え防止の適切な高さ */
+  font-weight: 400 !important;      /* 標準の太さで立体感をなくす */
+
+  text-rendering: geometricPrecision !important; /* ピクセル単位で精密描画 */
+  -webkit-font-smoothing: antialiased !important; /* アンチエイリアス有効で文字潰れ防止 */
+  -moz-osx-font-smoothing: grayscale !important;
+
+  text-shadow: none !important;     /* 文字の影を完全に消してフラット表示 */
+  background: #1e1e1e;              /* 黒背景で目に優しくコントラスト確保 */
+  color: #d4d4d4;                   /* ベース文字色は白寄りダークグレー */
+  padding: 14px;                     /* 上下左右均等の余白 */
+  border-radius: 6px;                /* 角を少し丸くして柔らかい見た目 */
+  overflow-x: auto;                  /* 横に長いコードはスクロール可能 */
+}
+
+/* ===============================
+   Prism.js トークン色設定（VSCode風）
+   コメント・文字列・キーワード・関数・変数などを色分け
+   =============================== */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #6a9955 !important; /* 緑色コメント */
+}
+
+.token.keyword {
+  color: #569cd6 !important; /* 青色キーワード */
+}
+
+.token.boolean,
+.token.number {
+  color: #b5cea8 !important; /* 緑寄りの数字・真偽値 */
+}
+
+.token.string,
+.token.char,
+.token.attr-value,
+.token.regex,
+.token.variable {
+  color: #ce9178 !important; /* オレンジ／赤文字列系 */
+}
+
+.token.function,
+.token.property,
+.token.class-name,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #dcdcaa !important; /* 黄色系（関数・変数・定数など） */
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.token.selector,
+.token.atrule,
+.token.attr-name,
+.token.builtin {
+  color: #c586c0 !important; /* 紫系（演算子・組み込み関数・CSS系） */
+}
+
+/* ===============================
+   コピー用ボタン（コード右上に表示）
+   =============================== */
+.copy-btn {
+  position: absolute;  /* 親の .code-wrapper 内で絶対配置 */
+  top: 6px;            /* 上から6pxの位置 */
+  right: 6px;          /* 右から6pxの位置 */
+  background: #0073aa; /* 青色背景 */
+  color: #fff;         /* 白文字 */
+  border: none;        /* 枠線なし */
+  padding: 4px 8px;    /* ボタン内余白 */
+  font-size: 12px;     /* 小さめ文字サイズ */
+  cursor: pointer;     /* ホバー時に指マーク */
+  border-radius: 3px;  /* 角を少し丸くする */
+}
+
+/* ===============================
+   コピー用ボタンにマウスをのせたとき
+   少し濃い青にして押せそうに見せる
+   =============================== */
+.copy-btn:hover {
+  background: #005177;
+}
