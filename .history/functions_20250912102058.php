@@ -228,7 +228,7 @@ add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
 // ダークモード＆季節判定 JS を条件付き読み込み
 // ==============================
 function enqueue_darkmode_season_script() {
-    if (is_singular('works') || is_post_type_archive('works') || is_page(123)) {
+    if (is_singular('works') || is_post_type_archive('works')) {
         wp_enqueue_script(
             'darkmode-season',
             get_template_directory_uri() . '/js/darkmode-season.js',
@@ -239,9 +239,6 @@ function enqueue_darkmode_season_script() {
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_darkmode_season_script');
-
-
-
 
 
 

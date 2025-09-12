@@ -228,7 +228,7 @@ add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
 // ダークモード＆季節判定 JS を条件付き読み込み
 // ==============================
 function enqueue_darkmode_season_script() {
-    if (is_singular('works') || is_post_type_archive('works') || is_page(123)) {
+    if (is_singular('works') || is_post_type_archive('works')) {
         wp_enqueue_script(
             'darkmode-season',
             get_template_directory_uri() . '/js/darkmode-season.js',
@@ -244,5 +244,18 @@ add_action('wp_enqueue_scripts', 'enqueue_darkmode_season_script');
 
 
 
+// 固定ページ「技術ブログ」専用で darkmode-season.js を読み込む
+function enqueue_darkmode_season_script_for_page() {
+    if (is_page(123)) { // ← 固定ページのIDに置き換え
+        wp_enqueue_script(
+            'darkmode-season',
+            get_template_directory_uri() . '/js/darkmode-season.js',
+            array(),
+            null,
+            true
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_darkmode_season_script_for_page');
 
 

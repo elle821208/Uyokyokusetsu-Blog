@@ -244,5 +244,18 @@ add_action('wp_enqueue_scripts', 'enqueue_darkmode_season_script');
 
 
 
+// works投稿タイプ or 固定ページID=123 で darkmode-season.js を読み込む
+function enqueue_darkmode_season_script() {
+    if (is_singular('works') || is_post_type_archive('works') || is_page(123)) {
+        wp_enqueue_script(
+            'darkmode-season',
+            get_template_directory_uri() . '/js/darkmode-season.js',
+            array(),
+            null,
+            true
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_darkmode_season_script');
 
 

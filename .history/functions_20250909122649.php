@@ -195,54 +195,24 @@ add_action('wp_enqueue_scripts', 'uyokyokusetsu_enqueue_copy_code_assets');
 
 
 
-
-
-
-// ==============================
-// 学習用 JavaScript ファイル群
-// ==============================
-function my_enqueue_scripts() {
-    wp_enqueue_script('tetsu-basics',
-        get_template_directory_uri() . '/Tetsu-Js-Study/basics.js',
-        array(), '1.0', true);
-
-    wp_enqueue_script('tetsu-functions',
-        get_template_directory_uri() . '/Tetsu-Js-Study/functions.js',
-        array(), '1.0', true);
-
-    wp_enqueue_script('tetsu-arrays-loops',
-        get_template_directory_uri() . '/Tetsu-Js-Study/arraysAndLoops.js',
-        array(), '1.0', true);
-
-    wp_enqueue_script('tetsu-objects-builtins',
-        get_template_directory_uri() . '/Tetsu-Js-Study/objectsAndBuiltIns.js',
-        array(), '1.0', true);
-
-    wp_enqueue_script('tetsu-dom-browser',
-        get_template_directory_uri() . '/Tetsu-Js-Study/domAndBrowser.js',
-        array(), '1.0', true);
+// ========================================
+// 自作JS（学習用 Tetsu-Uchuichi_js.js）を読み込み
+// ========================================
+function Uyokyokusetsu_enqueue_Tetsu_uchuichi_js() {
+    wp_enqueue_script(
+        'tetsu-uchuichi',  // このJSの識別名（自由に付けてOK）
+        get_template_directory_uri() . '/Tetsu-Uchuichi_js/Tetsu-Uchuichi_js.js', // ファイルの場所
+        array(),  // 依存スクリプト（なし）
+        null,     // バージョン番号（自動）
+        true      // 読み込み位置：trueはフッター
+    );
 }
-add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
-
-// ==============================
-// ダークモード＆季節判定 JS を条件付き読み込み
-// ==============================
-function enqueue_darkmode_season_script() {
-    if (is_singular('works') || is_post_type_archive('works') || is_page(123)) {
-        wp_enqueue_script(
-            'darkmode-season',
-            get_template_directory_uri() . '/js/darkmode-season.js',
-            array(),
-            null,
-            true
-        );
-    }
-}
-add_action('wp_enqueue_scripts', 'enqueue_darkmode_season_script');
+add_action('wp_enqueue_scripts', 'uyokyokusetsu_enqueue_tetsu_uchuichi_js');
 
 
 
 
+?>
 
 
 

@@ -77,15 +77,9 @@ code[class*="language-"] {
 .token.deleted {
   color: #dcdcaa !important; /* 黄色系（関数・変数・定数など） */
 }
-/* ===============================
-   Prism.js の entity や演算子に付く白背景を消す
-   =============================== */
-.token.operator,
-.token.entity {
-  background: none !important; /* 白背景を削除 */
-  box-shadow: none !important; /* 影が付いている場合も削除 */
-}
 
+.token.operator,
+.token.entity,
 .token.url,
 .token.selector,
 .token.atrule,
