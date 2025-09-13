@@ -1,0 +1,39 @@
+<!--https://www.youtube.com/watch?v=ZE484EEuQ8k&t=7669s-->
+<!--【2025年最新】宇宙一簡単なJavaScript入門講座-->
+
+<!--1:17:17～-->
+
+<!--↓↓↓ "html:5"でDOCTYPEからbodyタグまで一気に展開してくれる-->
+<!---言語設定はjaがいいかも、エラー回避。。。--->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="pokemon555"></div>
+
+    <div id="foofoo" style="background-color: gold;"></div><!--htmlにおいてidは1ページに一つしか存在できない-->
+    <div class="barbar" style="background-color: aqua;"></div><!--htmlにおいてclassは1ページに複数存在できる。-->
+    <div class="barbar" style="background-color: burlywood;"></div>
+    <div class="barbar" style="background-color: coral;"></div>
+    <div class="barbar" style="background-color: darkolivegreen;"></div>
+
+    <!--空っぽのHTMLクラス(.timeline)にJSのappendChildで情報を持った変数($post)を入れ込む。-->
+    <div class="timeline"></div><!--JSの変数$post。JScreateElementによるDOM操作で"post"（第二引数）という"クラス"（第一引数）を持った"articleタグ"（上記の）を生成する。--->
+    <!--※※JSのDOM操作でできるクラス → <article class="post">"お腹へったなう。"</article>  -->
+
+    <button type="button" id="button">クリックして！</button><!--JSでボタンを押すと文字がコンソール出力されるように設定する。-->
+    
+
+    <!--空っぽのHTMLのid(output)にJSのappendChildで情報を持った変数($pikachu22)を入れ込む。-->
+    <div id="output"></div><!--JSの変数$。JSのcreateElementによるDOM操作で"pikachu22"（第二引数）という"クラス"（第一引数）を持った"articleタグ"（上記の）を生成する。--->
+    <!--※※JSのDOM操作でできるクラス → <article class="pikachu22">"ピカチュウ！"</article>  -->
+    <button type="button22" id="button22">このボタンの中に秘密のポケモンがいます…</button><!--JSの変数$post。JSのcreateElementによるDOM操作で""（第二引数）という"クラス"（第一引数）を持った"タグ"（上記の）を生成する。--->
+
+
+    <script src="./app.js"></script>
+  </body>
+</html>
