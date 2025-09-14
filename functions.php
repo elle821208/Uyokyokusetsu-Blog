@@ -214,7 +214,7 @@ function my_enqueue_scripts() {
         get_template_directory_uri() . '/Tetsu-Js-Study/arraysAndLoops.js',
         array(), '1.0', true);
 
-    wp_enqueue_script('tetsu-objects-builtins',
+    wp_enqueue_script('tetsu-objects-builtins', 
         get_template_directory_uri() . '/Tetsu-Js-Study/objectsAndBuiltIns.js',
         array(), '1.0', true);
 
@@ -224,21 +224,25 @@ function my_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
 
+
+
 // ==============================
 // ダークモード＆季節判定 JS を条件付き読み込み
-// ==============================
+// ==============================       
 function enqueue_darkmode_season_script() {
+    // works 投稿タイプや特定ページに限定して読み込む例
     if (is_singular('works') || is_post_type_archive('works') || is_page(123)) {
         wp_enqueue_script(
             'darkmode-season',
-            get_template_directory_uri() . '/js/darkmode-season.js',
-            array(),
-            null,
-            true
+            get_template_directory_uri() . '/Tetsu-Js-Study/darkmode-season.js', // ← フォルダ構成に合わせたパス
+            array(), // 依存スクリプトなし
+            null,    // バージョン番号
+            true     // フッターで読み込む
         );
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_darkmode_season_script');
+
 
 
 
