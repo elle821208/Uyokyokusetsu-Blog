@@ -21,6 +21,9 @@ git add .
 git commit -m "今日の変更内容"
 ```
 
+git commit-m "今日の変更内容"  # ❌ スペースを入れ忘れると commit できない
+
+
 ## ③ GitHub にアップする（push）
 ```
 git push origin main
