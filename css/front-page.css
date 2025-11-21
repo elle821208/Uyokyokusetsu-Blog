@@ -2,7 +2,7 @@
 
 
 /*----------------------------------
- おしゃれなヘッダーデザイン
+ front-page.css おしゃれなヘッダーデザイン
 ----------------------------------*/
 
 
@@ -13,6 +13,28 @@ header {
   top: 0;
   z-index: 1000;
 }
+
+
+/*------------------------------
+ヘッダーサイトタイトル中央表示・大型化
+------------------------------*/
+header .site-title {
+    text-align: center;          /* 中央揃え */
+    font-size: 2.5rem;           /* 大きめサイズ。必要に応じて調整 */
+    font-weight: bold;            /* 太字 */
+    margin: 16px 0;               /* 上下の余白 */
+    color: #0073aa;               /* お好みの色 */
+    font-family: 'Helvetica Neue', 'Noto Sans JP', sans-serif;
+}
+
+/* スマホ表示では少し小さく調整 */
+@media (max-width: 768px) {
+    header .site-title {
+        font-size: 2rem;
+        margin: 12px 0;
+    }
+}
+
 /*-------ヘッダーリストを横並びにする---------*/
 header nav {
   max-width: 1200px;
@@ -58,9 +80,12 @@ header nav a:hover {
 
 
 /*-------トップページの画像---------*/
-#hero img{
+#hero img {
     width: 100%;
+    height: 300px;        /* ← 高さをお好みで調整（例：200〜400px） */
+    object-fit: cover;    /* 画像をいい感じにトリミング */
 }
+
 
 /*-------トップページの文章---------*/
 #about{
@@ -203,19 +228,72 @@ p.nothing img{/*サムネイル画像がないときの表示(index.phpのif判�
 
 
 
-
-
-
-/* 2025_05_21_chatgpt 投稿本文の読みやすさを改善するCSS */
-.post-content {
-  font-size: 18px;            /* 適度な文字サイズ */
-  line-height: 1.8;           /* 行間を広めに */
-  max-width: 700px;           /* 1行の長さ制限 */
-  margin: 0 auto;             /* 中央に寄せる */
-  padding: 0 16px;            /* スマホでも余白確保 */
-  color: #333;                /* 真っ黒ではなく柔らかい濃グレー */
+/* プロフィールページ専用の調整 */
+.profile-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   font-family: 'Noto Sans JP', sans-serif;
 }
+
+.profile-section h2 {
+  font-size: 1.4rem;
+  margin-top: 1.8em;
+  margin-bottom: 1em;
+  border-left: 4px solid #0073aa;
+  padding-left: 12px;
+  color: #333;
+}
+
+.profile-section p {
+  margin-bottom: 1.2em;
+  line-height: 1.8;
+}
+
+
+
+
+
+/* 投稿本文の読みやすさを改善するCSS */
+/* PCでは1000pxに広げる */
+/* 投稿本文とタイトルの共通幅 */
+.post-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 16px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #333;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+
+/* スマホは狭い画面なので自動で100%幅 */
+@media (max-width: 768px) {
+  .post-content {
+    max-width: 100%;
+  }
+}
+
+
+/* 投稿日 */
+.post-date {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 8px;
+}
+
+/* 投稿タイトル */
+.entry-title {
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1.4;
+  margin-bottom: 1.5em;
+}
+
 
 .post-content p {
   margin-bottom: 1.2em;       /* 段落ごとの余白 */
@@ -330,7 +408,87 @@ p.nothing img{/*サムネイル画像がないときの表示(index.phpのif判�
 
 
 
+/* CTAセクション */
+.cta-section {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #f9f9f9;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  text-align: center;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.cta-note {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+.cta-banner {
+  margin-top: 10px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0073aa;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #005f87;
+}
+
+
+/* お問い合わせページ専用 */
+.page-template-contact-page .post-content {
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 24px;
+  border-radius: 8px;
+}
 
 
 
+
+/* アーカイブページの記事ごとのデザイン */
+.archive-item {
+  font-size: 14px;   /* 投稿本文と同じに揃える */
+  line-height: 1.8;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.archive-title {
+  font-size: 1.5em;
+  margin: 0 0 5px;
+}
+
+.archive-title a {
+  text-decoration: none;
+  color: #333;
+}
+
+.archive-title a:hover {
+  color: #0073aa; /* WP標準っぽいリンクカラー */
+}
+
+.archive-meta {
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* アーカイブページの本文幅を揃える */
+.archive-items-wrapper {
+  max-width: 1000px;   /* 投稿ページと同じ幅 */
+  margin: 0 auto;
+  padding: 0 16px;
+}
 

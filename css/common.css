@@ -1,6 +1,6 @@
 @charset "utf-8";/*---文字化け対策---*
 /*------------
-リセットcss
+common.cssリセットcss
 -------------*/
 
 *{
@@ -35,6 +35,18 @@ body {
   color: #333;
   line-height: 1.6;
   background-color: #fafafa;
+}
+
+
+/* 共通の本文ラッパー */
+.content-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 16px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #333;
+  font-family: 'Noto Sans JP', sans-serif;
 }
 
 

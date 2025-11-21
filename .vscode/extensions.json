@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",           // コードをきれいに整える
+    "ritwickdey.liveserver",            // HTMLやPHPをブラウザでリアルタイム表示
+    "bmewburn.vscode-intelephense-client", // PHPの自動補完・エラー検出
+    "dbaeumer.vscode-eslint",           // JavaScriptの文法チェック
+    "ecmel.vscode-html-css",            // HTMLとCSSの補完
+    "mrmlnc.vscode-scss",               // SCSSの補完
+    "eamodio.gitlens"                   // Gitの変更履歴を見える化
+  ]
+}

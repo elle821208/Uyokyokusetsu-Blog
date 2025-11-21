@@ -1,17 +1,20 @@
-
 <?php get_header(); ?>
 
 <main>
-    <section>
-        <p><?php echo get_the_date();?></p><!--wpの投稿の日付を読み込む。index.phpにも設定する。-->
-        <h2><?php the_title(); /*wpの投稿のタイトル文を読み込む。index.phpにも設定する。*/?></h2>
-    </section>
     <section class="post-content">
-    <?php the_content(); ?>
+        <!-- 投稿日 -->
+        <p class="post-date"><?php echo get_the_date(); ?></p>
+
+        <!-- 投稿タイトル -->
+        <h1 class="entry-title"><?php the_title(); ?></h1>
+
+        <!-- 投稿本文 -->
+        <?php the_content(); ?>
     </section>
 
-    <section>
-        （※wpのニュース投稿一覧の下部）全ページ表示したい広告を入れる場所CTA(vscodeのsingle.php)
-    </section>
+    <!-- CTAや注意書きの共通パーツを呼び出し -->
+    <?php get_template_part('template-parts/content', 'cta'); ?>
+
 </main>
+
 <?php get_footer(); ?>

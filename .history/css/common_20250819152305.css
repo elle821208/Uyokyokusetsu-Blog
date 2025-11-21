@@ -1,0 +1,54 @@
+@charset "utf-8";/*---文字化け対策---*
+/*------------
+common.cssリセットcss
+-------------*/
+
+*{
+    padding: 0;
+    margin:0;
+}
+
+a{
+    /* color: var(--primary-color); ←ヘッダーリストaタグリンクはデフォルト青色にする*/
+    text-decoration: none;
+}
+ul{
+    list-style-type: none;
+}
+
+
+
+/*------------
+共通部分
+-------------*/
+/*-カスタムプロパティ-*/
+:root{
+    --background-color: #fff;
+    --primary-color:#333;
+    --secondary-color:#f7f0d7;
+}
+
+
+body {
+  font-family: 'Helvetica Neue', 'Noto Sans JP', sans-serif;
+  font-size: 14px;   /* ← ここで文字をやや小さく */
+  color: #333;
+  line-height: 1.6;
+  background-color: #fafafa;
+}
+
+
+/* 共通の本文ラッパー */
+.content-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 16px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #333;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+
+
+

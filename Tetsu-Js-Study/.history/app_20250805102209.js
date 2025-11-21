@@ -1,0 +1,1253 @@
+//qiita JavaScriptの超基本】関数や戻り値、スコープについて簡単に解説
+//https://qiita.com/ta1fukumoto/items/981a0b766af17ed1a170
+
+//サムライエンジニア JavaScript入門】returnの使い方と戻り値・falseのまとめ！
+//https://www.sejuku.net/blog/28728
+
+//JavaScript入門]if – else文を使ってみよう(条件分岐)
+//https://codelikes.com/beginner-use-if-javascript/
+
+//Little-Strange-Softwareリトルストレンジソフトウェア
+// javascript初心者
+//Math.random 乱数
+//https://little-strange.hatenablog.com/entry/2021/05/21/235505
+
+
+
+
+
+// プログラミング初心者でjavascript学習中です。下記の内容のjavascriptファイルを機能ごとに分割したいです。適切なファイル名を教えてください。
+
+// 変数
+// 引数
+// 配列
+// データ型
+// 論理演算子
+// 関数
+// アロー関数
+// 確率Math.random
+// 戻り値
+// 条件式
+// if文
+// for文
+// ループ文
+// オブジェクト
+// コールバック関数
+// 標準組み込みオブジェクト
+// ブラウザapi
+// イベント
+// dom操作
+// デバッグ
+
+
+
+
+// ① basics.js
+// 👉 JavaScriptの基本文法や構文をまとめるファイル
+
+// 含める機能：
+
+// 変数（let, const）
+
+// データ型（文字列、数値、真偽値など）
+
+// 論理演算子（&&, ||, !）
+
+// 条件式
+
+// if文
+
+// デバッグ（console.log など）
+
+// ② functions.js
+// 👉 関数まわりを集中管理
+
+// 含める機能：
+
+// 関数
+
+// 引数
+
+// 戻り値
+
+// アロー関数
+
+// コールバック関数
+
+// ③ arraysAndLoops.js
+// 👉 繰り返しと配列操作
+
+// 含める機能：
+
+// 配列
+
+// for文
+
+// ループ文（while, do...whileなど）
+
+// ④ objectsAndBuiltIns.js
+// 👉 オブジェクトと標準組み込みの機能
+
+// 含める機能：
+
+// オブジェクト
+
+// 確率（Math.random）
+
+// 標準組み込みオブジェクト（Math, Date, String, Array など）
+
+// ⑤ domAndBrowser.js
+// 👉 ブラウザとDOM関連処理
+
+// 含める機能：
+
+// イベント（click, change など）
+
+// DOM操作（document.getElementById など）
+
+// ブラウザAPI（alert, prompt, fetchなど）
+
+
+
+
+
+// プロンプト集
+// 上の画像のコードを生成してください。
+// プログラミング未経験の小学生でもわかるように以下を守って丁寧にコメントをつけてください。
+// １）作業の順番がわかるように番号をつけてください
+// ２）引数、関数、変数の関係性がわかるようにしてください
+
+// 上記をwordpressの自作テーマのテックブログ記事のブロックエディターにそのまま貼り付けたいです。
+// Prism.js導入用のコードを作って生成してください。
+
+// 上記の内容と下記の内容を統合してください。
+// わかりやすいように見出しをつけてください。
+// コピペしてブログ記事に上げたいです。
+
+
+// 上記のコードを理解するだけでなく、
+// プログラミング未経験者の小学生でも自分で最初からコード書けるようになりたいです。
+// 上記の内容はそのままでさらにコメントを追記してください。
+
+
+// 下記の内容はそのままでコメントを
+// さらに丁寧にしてプログラミング未経験者の小学生でもわかるように教えてください。
+// とくにif文について小学生にもわかるように教えてください。
+
+
+
+// 上記の内容はそのままでさらに
+// 丁寧にプログラミング未経験者の小学生でもわかるようにコメントをつけてください。
+// また関数や変数がどこのページとファイルに影響しているのかを記載してください。
+
+
+// 下記の内容をアドラー心理学や原始仏教と照らし合わせて、
+// 上記のブログ文章と統合して修正してください。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Little-Strange-Softwareリトルストレンジソフトウェアより
+// javascript初心者 Math.random 乱数 ランダム おみくじ
+//https://little-strange.hatenablog.com/entry/2021/05/21/235505
+
+//１～６のいずれかの整数をランダムに返す
+// Math.floor関数)(引数)
+//「引数（ひきすう）」として与えた数値以下の、最大の整数を返します。
+// 例えば Math.floor(2.3) なら 2 、Math.floor(5) なら 5 、 Math.floor(0.7) なら 0 という値になります。
+// なお、引数が負の数だった場合…例えば Math.floor(-7.5) なら -8 、 Math.floor(-3) なら -3 という値が返ってくる事になります。
+
+const moo = 1 + Math.floor(Math.random() * 6); //整数Math.floorにとって()内の乱数"Math.random()*6"が引数になる。
+console.log("ランダムおみくじMath.floorとMath.randomで1から6の乱数を生成→" + moo);
+//いくつかのカッコが組み合わさっていますが、その一番内側から見ていきます。
+// 乱数Math.random()*6
+// ６種類の結果が欲しいので、
+// 乱数Math.random()に6を掛けています。
+// 乱数Math.random()は「0～0.999999…」（1未満）の範囲でしたが、それに6をかけた物は、
+//「0～5.999999…」（6未満）の範囲内の、
+// いずれかの数値、という事になります。（
+// この時点では小数のある数値なので膨大なパターンの結果になりえます）
+//そしてそれを、 整数Math.floor(Math.random()*6)…と、
+// Math.floor関数の引数として与える事で、
+// 「0か1か2か3か4か5」のどれか、という数値になります。
+//結果として欲しいのは「1～6」なので、
+// 1+Math.floor(Math.random()*6)と、単純に１を足すだけで、
+// 「1か2か3か4か5か6」のどれかをランダムで返す「サイコロ」になります^^
+
+//30％の確率で「当たり」を設定する。
+// ※※30%で数字1を出す。(1は当たり）、70%で数字0を出す。（0はハズレ）
+const noo = Math.floor(Math.random() + 0.3);
+console.log("" + noo);
+
+// 設定したい確率を、小数として Math.random() に足します。
+// 今回の例は30%なので、0.3を足しています。
+// また内側のカッコの内容から見ていきます。
+// Math.random()+0.3
+// Math.random()は「0～0.999999…」の範囲でしたが、それに0.3を足した物は、
+// 「0.30～1.299999999…」(←0.3を足した)の範囲から、
+// ランダムで数値が返ってくる事になります。
+// 0.3を足しているので、全ての数字「0.30～1.299999999…」の内、「1以上」の部分は30％あり、
+// 「1未満」の部分は残り70%ある、と範囲の大きさが分かれる事になります。
+// そしてそれをまた、
+// Math.floor(Math.random()+0.3)
+// Math.floorの引数にする事で整数が返ってくる。
+// 「1以上=30%」は1(1は当たり）、「1未満=70%」は0（0はハズレ）と分かれる事になりますが、その場合の「1以上」になる確率は前述の通り「足した小数に準ずる」事になります。
+
+// ※※ソシャゲのガチャで超レアを引くように…例えば「1万分の1の確率」なんて鬼のような設定にするなら、
+// Math.floor(Math.random()+0.0001)
+// とすると「1万回に1回の割合で1になり、それ以外は0」という確率を設定できます^^
+
+
+
+
+
+
+
+
+
+// 宇宙一わかりやすいJS
+// https://youtu.be/ZE484EEuQ8k?si=qE-_dh3BZNDctbmq
+// <!--1:34:00～-->
+
+
+//戻り値その３（引数と乱数Math.random）
+//Q.引数"theirHp"を持ち、実行したら
+//"theirHp"の値をそのまま戻り値として
+//返す関数"hornDrill"を作成しなさい。
+//ただし成功確率は30%とし、
+//失敗した場合は0を返すようにしなさい。
+//Hint
+//*if文を使います
+//Math.random()を使います
+
+// =======================================
+// 🌀 アロー関数 hornDrill を定義する
+// =======================================
+// 「hornDrill（つのドリル）」という関数を作成。
+// この関数は、一定の確率（30%）で相手の HP をそのまま返し、
+// それ以外（70%）では 0 を返すランダム処理を含んでいます。
+
+const hornDrill = (theirHp) => {
+  // (1-1) アロー関数 hornDrill を定義。
+  // (1-2) 引数 theirHp は、相手の HP（体力）を表す。
+  // 関数の呼び出し時に、その値がこの引数に入ってくる。
+
+  if (Math.random() <= 0.3) {
+    // (1-3) Math.random() は 0 以上 1.0 未満のランダムな小数を返す。
+    // (例: 0.1532や 0.3756や 0.9287 などの1.0未満)
+    // その値が 0.3 以下であれば（つまり 30% の確率で）、
+
+    return theirHp;
+    // (1-4) 引数で渡された相手の HP（theirHp）をそのまま返す。
+    // これは「攻撃が当たらなかった（無傷）」というシナリオを想定。
+  } else {
+    // (1-5) 上記以外の場合（70%の確率で）は、
+
+    return 0;
+    // (1-6) HP 0 を返す。
+    // これは「一撃必殺の攻撃が命中した（HP がゼロになった）」ことを表す。
+  }
+};
+
+// =======================================
+// 📢 関数を呼び出して結果を表示する
+// =======================================
+
+console.log("呼び出し元の右記の関数hondDrillに引数100を設定。上記の 関数 hornDrill(引数theirHp)にif文を組む。if文からMath.randomで30%の確率で引数theirHp100をreturnさせる。" + hornDrill(100) );
+// (2-1) 関数 hornDrill を呼び出し、引数に 100（相手の HP）を渡して実行。
+// (2-2) 実行のたびに 30% の確率で 100、70% の確率で 0 が返ってくる。
+// (2-3) 結果は console.log で出力され、
+//       「〇 ← 関数 hornDrill の実行結果ですよ」の形式で画面に表示される。
+// ➜ 出力例：100 ← 関数 hornDrill の実行結果ですよ（または 0 ← ...）
+
+
+
+
+
+// 宇宙一わかりやすいJS
+// https://youtu.be/ZE484EEuQ8k?si=qE-_dh3BZNDctbmq
+// <!--1::00～-->
+
+
+///戻り値その４(戻り値と関数 returnとundefind)
+///undefindがあらわる理由
+///※※※関数の処理にreturn戻り値がないと、呼び出し元に値が入らない。
+function hello3() {
+  //関数hello3
+  console.log("hello3はこんにちはがでますか？"); // ← ※※関数の処理内容にreturn戻り値がない。ただ処理内容"hello3はこんにちはが～"が出力されるだけ。
+}
+let result3 = hello3(); // ← 変数result3。上記の関数hello3に戻り値がない。関数hello3の値は入らない。
+console.log(result3); // ← 呼び出し元。値が入らないので、これは undefined と出る。
+console.log("↑関数hello3。関数の処理にreturn戻り値がない場合はundefindが表示される");
+
+///returnであらわる理由
+///※※※関数にreturn戻り値があると、呼び出し元に値が入る。
+function hello4() {
+  //関数hello4
+  return "returnを使うとhello4はこんにちはがでます！"; // ← ※※下記の呼び出し元用に、関数の処理内容にreturn戻り値がある。
+}
+let result4 = hello4(); // ← 変数result4。これに上記のreturnで返された関数hello4の値が入る
+console.log(result4); // ← 呼び出し元。これは "returnを使うとhello" が表示されます。
+console.log("↑関数hello4。関数の処理にreturn戻り値がある場合は値が出力される。");
+
+
+
+
+
+// 宇宙一わかりやすいJS
+// https://youtu.be/ZE484EEuQ8k?si=qE-_dh3BZNDctbmq
+// <!--1:37:00～-->
+//オブジェクト（データをまとめて管理する箱のようなもの）
+//プロパティ（情報）
+//メソッド（オブジェクトが持つ関数のこと）
+
+const snsUser = {
+  //constで「オブジェクト名」を定義する。波括弧内に情報を入れておく。
+  id: 1, //プロパティ名: 値
+  userName: "Taro",
+  gender: "male",
+  like: function () {
+    //メソッド名like:関数。{}内に処理を書く。※注意。今回likeは小文字。
+    return "まいどおおきに！"; //「もしreturn文がない場合、関数をconsole.log()で呼ぶとundefinedが表示される」
+  },
+  post: function () {
+    // ↓ returnがないので戻り値がundefinedになる
+    "投稿しました！"; // この文字列は書かれているが、returnで返していない
+  },
+  followers: ["Yamada", "Suzuki", "Tanaka"],
+  following: ["Yamada", "Suzuki"],
+  premium: true,
+  darkMode: false,
+  posts: null,
+  settings: {
+    //プロパティsettingsの中にオブジェクトを作る
+    premium: true,
+    darkMode: false,
+  },
+  actions: {
+    like: () => {},
+    post: () => {},
+  },
+};
+
+//オブジェクトsnsUserの各プロパティを実行し情報を呼び出す。
+console.log(snsUser.id + "←snsUser.id で上記の設定した情報（constで定義したオブジェクトsnsUser {}内のプロパティid: プロパティの値1）を呼び出す。"); //オブジェクト名.プロパティ名で値を取り出す。
+console.log(snsUser.like() + "←snsUser.like() で上記のプロパティlike関数のreturnの値「まいどおおきに」だけを取り出す。"); //オブジェクト名.プロパティ名で値を取り出す。
+console.log(snsUser.post() + " ←snsUser.post() で上記のプロパティpost関数の値を呼び出す。 post関数にreturnがないので、undefinedになる");
+console.log(snsUser.followers[0] + "←snsUser.followers[0] で上記のプロパティfollowers配列の]0]番目yamadaを出力"); //配列followersの0番目を出力
+console.log(snsUser.settings.darkMode + "snsUser.settings.darkMode で 上記のプロパティsettingsの中にさらに作ったプロパティdarkModeの値falseを出力");
+
+
+
+
+
+// 宇宙一わかりやすいJS
+// https://youtu.be/ZE484EEuQ8k?si=qE-_dh3BZNDctbmq
+// <!--1:41:48～-->
+// =======================================
+// 🧱 Thisを使う。オブジェクト snsUser2 を定義する
+// =======================================
+
+const snsUser2 = {
+  // (1-1) オブジェクト snsUser2 を作成。
+  //       SNS ユーザー情報をまとめたデータのかたまり。
+
+  id: 1,
+  // (1-2) プロパティ id を定義。値は 1。
+  //       これはユーザー識別用の番号のようなもの。
+
+  userName: "Tomoko",
+  // (1-3) プロパティ userName を定義。値は "Tomoko"。
+  //       このユーザーの名前として使われる。
+
+  post: function (contents) {
+    // (1-4) 関数メソッド post を定義。これは「投稿する動作」を表す関数。
+    //       引数 contents は投稿内容（文字列）を受け取る。
+
+    return contents + "を投稿しました by…" + this.userName;
+    // (1-5) 戻り値を定義。
+    //       「投稿内容」＋「固定メッセージ」＋「ユーザー名（this.userName）」を連結して返す。
+    //       `this.userName` により、「このオブジェクト自身の userName」を参照している。
+
+    // 🧠【this の意味と役割】
+    // - この関数は「snsUser2.post(...)」という形で呼び出されているため、
+    //   この this は「snsUser2 オブジェクトそのもの」を指している。
+    // - よって this.userName は snsUser2.userName と同じ意味になる。
+    //   → この場合、"Tomoko" という値が参照される。
+
+    // ✅【this を使うメリット】
+    // - userName を直接書かずに this を使うことで、同じ関数を他のオブジェクトに使いまわせる（再利用性◎）。
+    // - オブジェクト内のプロパティを柔軟に参照できるため、設計がシンプルで保守性が高い。
+    // - userName を後から変更しても、常に最新の値が使われる。
+
+    // ❌【this を使わなかった場合】
+    // たとえば次のように書いた場合：
+    //   return contents + "を投稿しました by…" + "Tomoko";
+    // - ユーザー名が固定になり、他のユーザーオブジェクトに使いまわせない。
+    // - ユーザー名を変更しても return の内容に反映されない。
+    // → 保守性・柔軟性が低くなる。
+  },
+};
+
+// =======================================
+// 📢 関数を呼び出して戻り値を表示する
+// =======================================
+
+console.log(
+  "呼び出し元。snsUser2.post(引数: プログラミングなう。) を実行。" +
+  "オブジェクト snsUser2 の post 関数メソッド内の return により、" +
+  "引数 contents（＝プログラミングなう。） + 'を投稿しました by…' + this.userName（＝Tomoko）" +
+  " が連結された文字列を返す → " +
+  snsUser2.post("プログラミングなう。")
+);
+// (2-1) snsUser2 オブジェクトの post メソッドを呼び出す。
+// (2-2) 引数として "プログラミングなう。" を渡して実行。
+//       この値は、メソッド内の contents に渡される。
+// (2-3) 実行すると、return により以下の文字列が生成される：
+//        → "プログラミングなう。を投稿しました by…Tomoko"
+// (2-4) その文字列が関数の外に返され、console.log によって表示される。
+
+
+// =======================================
+// 🔄 this を使わなかった場合（固定値で記述）
+// =======================================
+
+const snsUser3 = {
+  userName: "Hana",
+  post: function (contents) {
+    return contents + "を投稿しました by…" + "Hana";
+    // ⚠️ ユーザー名が固定されているため、
+    //     他のユーザーにこのメソッドを再利用することができない。
+  },
+};
+
+console.log(snsUser3.post("今日は晴れ☀"));
+// 出力例: "今日は晴れ☀を投稿しました by…Hana"
+
+
+// =======================================
+// ⚠️ アロー関数で書いた場合（this が使えない例）
+// =======================================
+
+const snsUser4 = {
+  userName: "Ken",
+  post: (contents) => {
+    return contents + "を投稿しました by…" + this.userName;
+    // ⚠️ アロー関数は this を「定義された場所の外側」から引き継ぐ。
+    //     この場合、this は snsUser4 ではなく、グローバル（もしくは undefined）を指す。
+    //     つまり userName が正しく取得できない（undefined になる可能性あり）。
+  },
+};
+
+console.log(snsUser4.post("お昼ご飯なう🍜"));
+// 出力例: "お昼ご飯なう🍜を投稿しました by…undefined"
+// ❗ このように、アロー関数ではオブジェクトの this は期待通りに動作しない。
+
+// ✅【結論】
+// - オブジェクトメソッドで this を使う場合は、アロー関数ではなく function を使う。
+// - アロー関数は this をバインドしないため、this が必要な場面には不向き。
+
+
+
+
+
+
+// 宇宙一わかりやすいJS
+// https://youtu.be/ZE484EEuQ8k?si=qE-_dh3BZNDctbmq
+// <!--1:42:50～-->
+
+//オブジェクト、プロパティ情報、メソッド（[]配列）
+//Q.キャラクター「デンコウ」のオブジェクトを作りなさい。含めるべきプロパティは下記。
+// name(文字列 -> "デンコウ")
+// level(数字 -> 18)
+// types(文字列の配列 -> でんき )
+// skills(文字列の配列 -> ライトスパーク、フラッシュダッシュ、ショックパンチ)
+
+const denkou = {
+  name: "デンコウ",
+  level: 18,
+  types: ["でんき"],
+  skills: ["ライトスパーク", "フラッシュダッシュ", "ショックパンチ"],
+};
+
+console.log(denkou.name + " ← オブジェクトdenkouのname デンコウ");
+console.log(denkou.level + " ← オブジェクトdenkouのlevel 18");
+console.log(denkou.skills[0] + " ← オブジェクトdenkouの配列skillsの0番目 ライトスパーク");
+
+
+
+
+
+
+// 宇宙一わかりやすいJS
+// https://youtu.be/ZE484EEuQ8k?si=qE-_dh3BZNDctbmq
+// <!--1:45:07～-->
+
+
+
+//オブジェクト、プロパティ情報、メソッド（[]配列、++インクレメント繰り返し、if文、pushプロパティ追加）
+//Q.のオブジェクトに下記のスパークバディ仕様を満たすメソッド"levelUp"を追加しなさい。
+//ー実行するとlevelが1増える。
+//levelが20以上でskillsに"ライトニングスパーク"が追加される。
+//Hints:下記のコードを使います
+// ※this.level++ インクレメント
+// this.skills.push("ライトニングスパーク");
+
+
+//  ↓↓コードのみ
+const sparkBuddyAlt = {
+  name: "スパークバディ",
+  level: 18,
+  types: ["でんき"],
+  skills: ["エレクトロボルト", "スピードダッシュ", "パワータックル"],
+  levelUp: function () {
+    this.level++;
+    if (this.level >= 20) {
+      this.skills.push("ライトニングスパーク");
+    }
+  },
+};
+
+console.log(sparkBuddyAlt.level, sparkBuddyAlt.skills);
+
+sparkBuddyAlt.levelUp();
+console.log(sparkBuddyAlt.level, sparkBuddyAlt.skills);
+
+sparkBuddyAlt.levelUp();
+console.log(sparkBuddyAlt.level, sparkBuddyAlt.skills);
+
+// ↑↑↑コードのみ
+
+
+
+
+// ↓↓↓コメント付き
+const sparkBuddy = {
+  // (1-1) オブジェクト sparkBuddy を作成。
+  //       これはオリジナルキャラクター「スパークバディ」の情報をまとめたもの。
+
+  name: "スパークバディ",
+  // (1-2) プロパティ name。文字列 "スパークバディ" を格納。
+  //       キャラクターの名前を示す。
+
+  level: 18,
+  // (1-3) プロパティ level。現在のレベルを数値で表す。
+  //       初期値は 18。
+
+  types: ["でんき"],
+  // (1-4) プロパティ types。配列形式でタイプ（属性）を記録。
+  //       ここでは 1 つだけでんきタイプ。
+
+  skills: ["エレクトロボルト", "スピードダッシュ", "パワータックル"],
+  // (1-5) プロパティ skills。覚えている技を配列で管理。
+  //       初期状態では 3 つの技を持っている。
+  //       このあとレベルが上がると、条件付きで新しい技が追加される。
+
+  levelUp: function () {
+    // (1-6) メソッド levelUp を定義。
+    //       スパークバディのレベルを上げるための関数。
+
+    this.level++;
+    // (1-7) インクリメント演算子（++）を使って、
+    //       現在のレベルを 1 増加させる。
+    //       this.level は、このオブジェクト（sparkBuddy）の level を指す。
+
+    // 🧠【インクリメント演算子（++）とは？】
+    // - 変数の値を 1 増やすための記号。
+    //   たとえば `x++` は「x に 1 を加える」と同じ意味。
+    // - `this.level++` と書くことで、元の値を保持しながら、
+    //   内部的に level の値を「+1」して更新している。
+    // - レベルアップするたびに、元の状態を上書きして記録するので、
+    //   次にこのメソッドが呼ばれたときには、前回のレベルが基準になる。
+    //   → 状態を保持して継続的に変化できるのが特徴！
+
+    if (this.level >= 20) {
+      // (1-8) 条件分岐：レベルが 20 以上になったら…
+
+      this.skills.push("ライトニングスパーク");
+      // (1-9) 新しい技「ライトニングスパーク」を skills 配列の末尾に追加する。
+      //       push() は、配列の最後に要素を追加するためのメソッド。
+    }
+
+    // ✅【this の役割】
+    // - this.level → このオブジェクト（sparkBuddy）の level を参照。
+    // - this.skills → このオブジェクトの skills 配列を参照。
+    // - つまり「どのインスタンス（個体）の情報を操作しているか」を示す仕組み。
+    // - 他のキャラクターオブジェクトにこのメソッドをコピーしても機能する（再利用性◎）。
+  },
+};
+
+// =======================================
+// 🧪 メソッドを実行して状態変化を確認
+// =======================================
+
+console.log(
+  "📢 呼び出し元 console。" +
+  "最初の状態として、オブジェクト sparkBuddy の初期レベルは 18。" +
+  "スキル（skills）には 3 つの技が登録されている状態です。→",
+  sparkBuddy.level,
+  sparkBuddy.skills
+);
+// (2-1) 初期状態を表示。
+//       → レベル: 18、スキル: ["エレクトロボルト", "スピードダッシュ", "パワータックル"]
+
+sparkBuddy.levelUp();
+// (2-2) メソッド levelUp() を 1 回実行。
+//       → this.level++ によりレベルが 19 に上昇。
+//       → ただし、まだレベル 20 に達していないため「ライトニングスパーク」は追加されない。
+
+console.log(
+  "📢 呼び出し元 console。" +
+  "↑ 上の行で sparkBuddy.levelUp() を 1 回実行しました。" +
+  "現在のレベルは 19。if 文の条件（レベル20以上）にはまだ届いていないため、" +
+  "スキル『ライトニングスパーク』はまだ追加されていません。→",
+  sparkBuddy.level,
+  sparkBuddy.skills
+);
+// (2-3) レベル 19 の状態を表示。
+//       → スキル配列には変化なし（3つのまま）。
+
+sparkBuddy.levelUp();
+// (2-4) メソッド levelUp をもう一度実行。
+//       → レベルが 20 になり、条件を満たすので "ライトニングスパーク" を追加。
+
+console.log(
+  "📢 呼び出し元 console。" +
+  "↑ 上の行でオブジェクト sparkBuddy のメソッド levelUp() をもう一度実行しました。" +
+  "this.level++ によってレベルが 20 に上がり、" +
+  "if 文の条件（level >= 20）を満たしたため、" +
+  "新しいスキル『ライトニングスパーク』が skills に追加されました。→",
+  sparkBuddy.level,
+  sparkBuddy.skills
+);
+// (2-5) レベル 20、スキルが 4 つになっている状態を表示。
+
+console.log(sparkBuddy.level, sparkBuddy.skills);
+// (2-6) 現在の状態（レベルと技）を最終確認。
+
+// 🧠【まとめ】
+// - ++ は値を 1 ずつ増やす操作（状態が更新されていく）。
+// - メソッド内で this を使うことで、特定のオブジェクトの状態を内部から操作できる。
+// - 条件によって配列の内容を追加できる if + push の組み合わせも重要。
+// - オブジェクトの中で変化する値（状態）は、このようにメソッドで制御できる。
+
+
+
+
+
+
+
+
+
+// 宇宙一わかりやすいJS
+// https://youtu.be/ZE484EEuQ8k?si=qE-_dh3BZNDctbmq
+// <!--1:48:30～-->
+//標準組み込み関数
+// 🧪 parseInt を使ってみる（文字を数字に変える）
+
+console.log(parseInt("2") + " ←これは数字の2になります（文字じゃなくて計算できる本物の数字）");
+// 🔍 parseInt("2") は「文字の '2'」を 本物の数（数字 2）に変える魔法です。
+//    これは JavaScript にもともと入っている『標準組み込みオブジェクト』の関数。
+//    計算や数の変換をしたいときに使います。
+
+console.log("2" + " ←これは文字の2です（数字じゃないよ）");
+// 📝 この「2」はただの文字です。計算はできません。
+//    数のように見えるけど「言葉」なので、"2" + "3" → "23" のようにつながるだけ。
+
+// ===============================
+// 🧠 標準組み込みオブジェクトの確認
+// ===============================
+
+console.log(console);
+// 💬 console は JavaScript に組み込まれている「画面に表示するための道具セット」。
+//    log（記録する）という関数を使って、開発者が画面に情報を出すときに使います。
+// 🧠 console も 『標準組み込みオブジェクト』のひとつです。
+
+console.log(Math);
+// 📐 Math は「数学の便利な道具箱」です。
+//    たとえば、四捨五入（Math.round）や、ランダムな数（Math.random）などができます。
+// 🧠 Math も 『標準組み込みオブジェクト』です。
+//    これも最初から JavaScript に入っていて、どこでも使えます。
+
+// ===============================
+// 🧠 console.log って何？
+/*
+console.log() は「中身を画面に見せる」ための特別な道具です。
+もし console.log を使わずに Math や parseInt を使っても、
+そのままでは結果が画面に見えません！
+*/
+Math.round(7.8);       // ← 実行されているけど、画面には出ない（何も見えない）
+parseInt("100");       // ← 数字に変換されても、見えない！
+
+// 👇 なので、ちゃんと console.log() で「見せる」必要があります：
+console.log(Math.round(7.8));  // → 8 と表示される（7.8 を四捨五入した結果）
+console.log(parseInt("100"));  // → 100 と表示される（"100" を数字に変換）
+
+// ===============================
+// 🧠 まとめ（わかりやすい表）
+// ===============================
+
+/*
+
+| 項目                         | 例                  | 説明（やさしく）                                                                 |
+|------------------------------|---------------------|-----------------------------------------------------------------------------------|
+| ✅ オブジェクト               | { name: "たろう" }  | いろんな情報をまとめた「入れ物」みたいなもの。自分で作ることができる。             |
+| ✅ 標準組み込みオブジェクト   | Math, console        | JavaScript に最初から入っている便利な道具箱。どこでもすぐ使える。                   |
+| ✅ console.log（関数）        | console.log(...)    | 「画面に見せる」ための道具。console の中の log という名前の関数。                  |
+
+*/
+
+// 🎉 おしまい 🎉
+
+
+
+
+
+
+
+
+
+
+
+
+// 宇宙一わかりやすいJS
+// https://youtu.be/ZE484EEuQ8k?si=qE-_dh3BZNDctbmq
+// <!--1:51:15～-->
+//Q."ライオネル", "フェニクス", "ミズノカミ", "ソライア", "クロノス"を持つ配列myCreaturesを作成しなさい。
+
+
+// ==========================================
+// オリジナルキャラ名の配列（空想生物チーム）を作る
+// ==========================================
+// これは、自分のチームにいる「空想生物」の名前を並べた配列です。
+const myCreatures = ["ライオネル", "フェニクス", "ミズノカミ", "ソライア", "クロノス"];
+console.log("↑上の行の配列myCreaturesを表示 →" + myCreatures); 
+
+
+// ==========================================
+// Q. myCreatures に新しい仲間「ルーシオン」を追加しなさい。
+// ==========================================
+// push() を使うと、配列の一番うしろに新しい仲間を追加できます。
+myCreatures.push("ルーシオン");
+
+// 配列の中身を画面に表示する（console.log で確認）
+console.log("↑上の行でmyCreatures.push(ルーシオン)で配列にルーシオンを追加した →" + myCreatures); // ["ライオネル", "フェニクス", "ミズノカミ", "ソライア", "クロノス", "ルーシオン"]
+
+// ==========================================
+// Q. myCreatures に今いくつの仲間がいるか出力しなさい。
+// ==========================================
+// 配列の「.length」を使うと、要素の数（仲間の人数）を知ることができます。
+console.log("配列myCreaturesの現在の数 →"  + myCreatures.length); // 6（＝6体の空想生物がいる）
+
+// ==========================================
+// Q. oldGenerations と newGenerations を 1つの配列にまとめなさい。
+// ==========================================
+// それぞれ、ゲームの旧シリーズ名と新シリーズ名（オリジナル名）です。
+const oldGenerations = ["フレイム", "リーフ", "アクア"];
+const newGenerations = ["ライト", "シャドウ", "クリスタル"];
+
+// concat() を使うと、2つの配列をくっつけることができます。
+const allGenerations = oldGenerations.concat(newGenerations);
+
+// まとめた結果を表示
+console.log("↑上の行でconcatで 配列oldGenerations と 配列newGenerations をくっつけた →" + allGenerations);
+
+
+
+
+
+
+
+// 宇宙一わかりやすいJS
+// https://youtu.be/ZE484EEuQ8k?si=qE-_dh3BZNDctbmq
+// =========================================
+// 🌐【ブラウザAPIってなに？】🧠
+// -----------------------------------------
+// ⏰ 1:54:00～（参考タイムスタンプ）
+// =========================================
+//
+// 📌 ブラウザの開発者ツール（DevTools）の「Console」画面で、
+//     ↓このように入力してみましょう↓
+//
+//          👉 window
+//
+// 🖥️ すると、下記のような「標準組み込みオブジェクト」が表示されます：
+//
+//     📁 DOM（Document Object Model）
+//     📁 BOM（Browser Object Model）
+//     📁 alert(), setTimeout(), console.log() など...
+//
+// 🎯 つまり：
+//     JavaScriptは「windowオブジェクト」にぶら下がって
+//     動いている「機能の集まり」を使っている、ということ！
+//
+// 🧩 例：
+//     console.log は実は... → window.console.log と同じ！
+//
+// 🔍 チェックポイント：
+//     windowっていうのは、ブラウザ全体のことを表しているよ！
+
+// -----------------------------------------
+// 🖼️ イメージ図（アスキー風）
+// -----------------------------------------
+//          ┌─────────────────────────────┐
+//          │         window（ブラウザ）         │
+//          │  ┌─────┐ ┌────────┐ ┌──────┐ │
+//          │  │ alert │ │ console  │ │ innerWidth │...│
+//          │  └─────┘ └────────┘ └──────┘ │
+//          └─────────────────────────────┘
+//
+// =========================================
+// 📏【画面サイズの取得】🪟
+// -----------------------------------------
+// window.innerWidth / innerHeight とは？
+// → ブラウザ画面の「表示領域の横幅・高さ」を取得できる便利なプロパティ！
+//    ※ window. は省略してもOK
+// =========================================
+
+console.log("画面の横幅を表示する。※windowは省略できる。 →" + window.innerWidth);
+// 🧭 出力例: 1280（← ブラウザの表示領域の横幅）
+
+console.log("画面の高さを表示する。※windowは省略できる。 →" + window.innerHeight);
+// 🧭 出力例: 720（← ブラウザの表示領域の高さ）
+
+//
+// 🗒️ 補足メモ：
+// innerWidth/innerHeightはレスポンシブ対応などでもよく使われます。
+// 画面サイズに応じてデザインを変える処理（メディアクエリ的なもの）にも活用されます。
+
+// -----------------------------------------
+// 🧠【さらに詳しく】innerHeightとは？
+// -----------------------------------------
+// 📌 innerHeight は、ブラウザウィンドウの中で、実際に「表示できる高さ」のこと。
+//     - 画面の高さ ≠ ディスプレイの物理的な高さ！
+//     - タブ・アドレスバー・ブックマークバーなどは含まれません。
+//     - ユーザーが「見えている範囲」の高さだけを返します。
+//
+// 🧪 具体例：たとえばPCで次のような画面構成だったとします
+//
+// ┌─────────────────────────────┐
+// │ タブ / URLバー（ここは除外）      ←❌ innerHeightに含まれない │
+// ├─────────────────────────────┤
+// │  ユーザーに見えているページ部分      ←✅ innerHeightで取得可能 │
+// │  この範囲が 720px だったとします      ← 例）window.innerHeight = 720 │
+// └─────────────────────────────┘
+//
+// 🧩 こんなときに使う：
+// - 「スクロールが必要かどうか」を判定するとき
+// - ヘッダーやフッターを画面いっぱいに広げるとき
+// - 画面サイズに合わせたポップアップやアニメーションを表示するとき
+//
+// 🔁 高さを動的に取得する例：
+//
+// window.addEventListener("resize", () => {
+//     console.log("リサイズ後の高さ：" + window.innerHeight + "px");
+// });
+//
+// ✅ リサイズイベントと一緒に使うことで、
+//    ユーザーの画面変更にリアルタイムで対応できる！
+
+
+
+
+// -----------------------------------------
+// 📄【補足】documentと入力するとどうなる？
+// -----------------------------------------
+// ▶️ Console画面で「document」と入力すると、
+//     HTML全体の構造（DOMツリー）が取得できます。
+//     これは「今表示されているページの設計図」のようなもの！
+//
+//     例）Googleのトップページで「document」と入力すると：
+//        → <html>〜</html>までのタグ構造がそのまま出てくる
+//
+// 🧠 document は「window.document」の略記。
+//     windowの中にある「ページ情報の入口」と覚えると◎
+//
+// 🧪 これを使って例えば以下のようなことができます：
+//     console.log(document.title);   // ページのタイトルを取得
+//     console.log(document.body);    // bodyタグ以下の要素を取得
+// ┌────────────────────┐
+// │       window       │  ← ブラウザ全体のAPI
+// │  ┌────────────┐  │
+// │  │  document   │  │  ← 表示中のページ（DOMツリー）
+// │  │  ┌───────┐ │  │
+// │  │  │ <html> │ │  │
+// │  │  │  ...   │ │  │
+// │  │  └───────┘ │  │
+// │  └────────────┘  │
+// └────────────────────┘
+
+
+
+
+
+
+
+
+
+
+
+// 宇宙一わかりやすいJS
+// https://youtu.be/ZE484EEuQ8k?si=qE-_dh3BZNDctbmq
+// <!--1:56:40～-->
+
+
+// =========================================
+// 📝【document.querySelectorってなに？】🎯
+// -----------------------------------------
+// ▶️ ブラウザ画面（HTML）の中から、特定の要素を探して操作できるメソッド
+//     - window.document.querySelector(...)
+//     - よく使うCSSセレクタ（#id や .class）で指定できるのが便利！
+//
+//     ※ document は window.document の略称（省略OK）
+// =========================================
+
+// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+// 🎯【目的】：HTMLの id="shingeki" にテキストを追加する
+//     index.html 側に以下のようなタグがある前提：
+//     <div id="shingeki"></div>
+// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+
+document.querySelector("#shingeki").innerText = 
+    "一匹残らず駆逐してやる！"
+    + "（← jsの document.querySelector('#shingeki').innerText を使って、"
+    + "htmlの id=\"shingeki\" の場所にテキストを追加しています）";
+
+// 🧠 解説：
+// - document.querySelector("#shingeki")
+//     → HTML内の「idがshingekiの要素」を取得
+//
+// - .innerText = "文字列"
+//     → その要素の中のテキストを、指定した文字列に書き換える
+//
+// 🧪 結果：
+// <div id="shingeki">一匹残らず駆逐してやる！...</div> となる！
+
+// 🧩 よくある使い方：
+// ・ボタンをクリックしたときにメッセージを表示
+// ・エラーメッセージの表示切り替え
+// ・ページの一部を動的に書き換えるなど
+
+
+
+
+
+// 宇宙一わかりやすいJS
+// https://youtu.be/ZE484EEuQ8k?si=qE-_dh3BZNDctbmq
+///<!--2:00:00～-->
+
+// =========================================
+// ⏰【setTimeout / clearTimeout ってなに？】⌛️
+// -----------------------------------------
+// ▶️ 一定時間が経過した後に、ある処理を実行する関数。
+//     JavaScriptの「非同期処理」の基本です。
+// =========================================
+
+// -----------------------------------------
+// 🧭【目的】：1秒後にアラートを出す予約をするが、すぐにキャンセルする
+// -----------------------------------------
+
+const timer = setTimeout(function () {
+  // 🧠 setTimeout(関数, ミリ秒) の形で使うよ！
+  // ここでは 1000ミリ秒（＝1秒）後に下記の処理を実行：
+
+  alert("setTimeoutで遅れてアラート!");
+}, 1000); // ⏳ 1秒（1000ミリ秒）後にアラートが出る予定！
+
+// -----------------------------------------
+// 🚫 しかし…すぐに clearTimeout を呼んで予約をキャンセル！
+// -----------------------------------------
+
+clearTimeout(timer);
+// ✅ これで上記の「timerに予約された処理」は実行されません！
+//
+// 🎯 イメージ：
+// const timer = setTimeout(...) はタイマーの予約
+// clearTimeout(timer) は「その予約を取り消す」命令
+
+
+
+
+
+
+// 宇宙一わかりやすいJS
+// https://youtu.be/ZE484EEuQ8k?si=qE-_dh3BZNDctbmq
+///<!--2:02:19～-->
+
+
+// =========================================
+// 🔍【querySelector / querySelectorAll】🧩
+// -----------------------------------------
+// ▶️ HTMLの要素を「CSSセレクタ」で取得して、操作できる便利なメソッド
+//     - querySelector     → 最初の1つだけ取得（id/class/タグOK）
+//     - querySelectorAll  → 該当するすべてを取得（配列のようなNodeList）
+// =========================================
+
+
+// ✅ id="foofoo" の要素に、1つだけテキストを挿入
+console.log(
+  (document.querySelector("#foofoo").innerHTML =
+        "← jsのdocument.querySelector(#foofoo).innerHTMLを使う。"
+        + "HTMLの1つのidをquerySelectorでひとつの変数として取得した。"
+        + "idはhtmlにおいて1ページに一つしか存在できない。"
+        + "そしてBg-goldを呼び出した。")
+);
+// 🧠 ポイント：
+// - querySelector("#foofoo") → id="foofoo" を取得（※ # が必要）
+// - innerHTML = "..."        → 要素の中のHTMLを置き換える
+// - id属性は1ページ内に1つだけ！
+
+
+// ✅ .barbarクラスの要素をすべて取得し、[0]番目の中身を変更
+console.log(
+  (document.querySelectorAll(".barbar")[0].innerHTML =
+        "← jsのdocument.querySelectorALL(barbar)[0].innerHTMLを使う。"
+        + "HTMLの4つのbarbarクラスをquerySelectorAllで配列としてまとめた。"
+        + "そして[0]番目のBg-Aquaを呼び出した。")
+);
+// 🧠 ポイント：
+// - querySelectorAll(".barbar") → .barbar すべて取得（NodeList）
+// - [0] → 最初の要素を選択
+// - innerHTML で中身を書き換え
+
+
+// ✅ .barbar の [1]番目の要素を操作（同じNodeListの続き）
+console.log(
+    (document.querySelectorAll(".barbar")[1].innerHTML =
+        "← jsのdocument.querySelectorALL(barbar)[1].innerHTMLを使う。"
+        + "barbarクラスの配列の中身を[1]番目のBg-Burlywoodを指定し、innerHTMLで編集する。"
+        + "※※querySelectorAll（idもクラスも取得可）で取得した。")
+);
+
+
+// =========================================
+// 🧰【getElementById / getElementsByClassName】🧰
+// -----------------------------------------
+// ▶️ より古くからある取得方法（HTMLCollectionが返る）
+//     - getElementById            → id名を指定（1つだけ）
+//     - getElementsByClassName   → クラス名を指定（複数、配列風）
+// =========================================
+
+
+// ✅ getElementById で id="foofoo" の要素を「直接取得」して、ログに表示
+console.log(document.getElementById("foofoo"));
+
+// 🧠 解説：
+// - document.getElementById("foofoo") は、HTML内で id="foofoo" の要素を1つだけ取得するメソッド。
+// - id属性は HTML文書内で「一意」である必要があるため、基本的に「1対1の関係」で要素操作ができる。
+// - 同様の取得方法として querySelector("#foofoo") もあるが、
+//   getElementById の方が「id取得に特化していて、少しだけ高速」とされている。
+
+// 🖥️ なぜコンソールに <div id="foofoo" ...> がそのまま表示されるの？
+// - この console.log(...) の結果として表示されるのは、HTML要素そのもの（DOMオブジェクト）。
+// - そのため、ブラウザのコンソール画面上には次のように表示されます：
+//
+//     <div id="foofoo" style="background-color: gold"></div>
+//
+// - これは「文字列」ではなく、JSが取得した「DOMノード（要素本体）」を
+//   ブラウザの開発者ツールが HTML形式でわかりやすく表示しているためです。
+
+// ✅ このような表示は、DOM構造や属性の確認にとても便利です。
+
+// -----------------------------------------
+// 💡 補足：中身のテキストやHTMLを確認したい場合
+// -----------------------------------------
+
+// ✅ innerHTMLを使って、要素の「中のHTML内容」を取得
+console.log(document.getElementById("foofoo").innerHTML);
+// → 何も入っていなければ ""（空文字列）
+// → 要素内にHTMLタグやテキストが入っていれば、それが出力されます
+
+// 🔍 innerTextを使えば、「見た目上のテキスト」だけ取得することも可能
+// console.log(document.getElementById("foofoo").innerText);
+
+
+
+// ✅ getElementsByClassName で .barbar の[2]番目を編集
+console.log(
+  (document.getElementsByClassName("barbar")[2].innerHTML =
+    "← jsのdocument.getElementsByClassName(barbar)[2].innerHTMLを使う。"
+        + "barbarクラスの配列の中身を[2]番目のBg-coralを指定し、innerHTMLで編集する。"
+        + "※※querySelectorAll（idもクラスも取得可）で取得した。")
+);
+// 🧠 getElementsByClassName → HTMLCollection（配列風オブジェクト）
+//    ※ querySelectorAll と違い、配列ではないけど似たように扱える
+
+
+
+
+// 宇宙一わかりやすいJS
+// https://youtu.be/ZE484EEuQ8k?si=qE-_dh3BZNDctbmq
+///<!--2:04:30～-->
+
+
+// ✅ 変数 $zoozoo に .barbar クラスを持つ要素すべて（4つ）を配列風（NodeList）で格納しておく
+const $zoozoo = document.querySelectorAll(".barbar");
+
+// 🧠 解説：
+// - querySelectorAll(".barbar") → .barbar クラスがついている全要素を取得（配列のようなNodeList）
+// - 取得結果は「配列のように」番号でアクセスできる（例：[0], [1], ...）
+// - ここでは、それらの要素を事前に $zoozoo という変数にまとめて格納している
+//   → こうしておくと、あとで何度も同じ要素にアクセスしやすくなる！
+// - 変数名に $ を付けているのは「DOM要素を保持していること」が一目で分かる命名スタイル（慣習）
+
+// ✅ $zoozoo の [3]番目の要素（darkolivegreen背景）を innerHTML で編集
+$zoozoo[3].innerHTML =
+  "← jsで、あらかじめ変数 $zoozoo に"
+  + "querySelectorAll（.barbar の4つのクラス）を格納している。"
+  + "その変数 $zoozoo の [3] 番目を innerHTML で編集して、"
+  + "内容を書き換えた。Bg-darkolivegreen（4番目の要素）。";
+
+// 🧠 ポイント：
+// - $zoozoo[3] は NodeList の4番目の要素（インデックスは0から始まる）
+// - innerHTML を使うことで、その要素の中身を自由に変更できる（テキストだけでなくHTMLタグもOK）
+// - 事前にまとめた変数から要素にアクセスすることで、コードが整理されて読みやすくなる！
+
+
+// ===============================================
+// 🧩【補足：DOM取得メソッドの比較】🛠️
+// -----------------------------------------------
+// ✅ それぞれの要素取得方法の違いと特徴：
+
+// ▶️ document.querySelector / querySelectorAll
+// - CSSセレクタ形式で柔軟に指定できる（id, class, タグ、属性などOK）
+// - querySelector       → 最初の1つだけ取得
+// - querySelectorAll    → 条件に合うすべてを NodeList で取得（配列風）
+// ✔️ メリット：柔軟でシンプルな構文。CSSと同じ感覚で書ける
+// ❌ デメリット：querySelectorAll は配列ではなく NodeList（完全な配列ではない）
+
+// ▶️ document.getElementById("id名")
+// - idを指定して「1つの要素」を高速に取得
+// ✔️ メリット：高速で分かりやすい。idの取得に特化
+// ❌ デメリット：id指定しかできない。柔軟性に欠ける
+
+// ▶️ document.getElementsByClassName("クラス名")
+// - クラス名に一致するすべての要素を HTMLCollection として取得（配列風）
+// ✔️ メリット：クラス要素の一括取得に使える（古いブラウザでも安定）
+// ❌ デメリット：querySelectorAll より機能が少ない（CSS属性セレクタ等が使えない）
+
+
+// ===============================================
+// 💡【補足：変数に格納しておく理由】
+// -----------------------------------------------
+// - 同じ要素やリストに複数回アクセスする場合、毎回DOMを検索するとパフォーマンスが低下する。
+// - 一度取得した要素（やリスト）を変数に格納しておけば、何度でも再利用でき、読みやすく効率的なコードになる。
+// - 開発時のデバッグやメンテナンスも簡単になる（変数名で意味が分かるため）。
+// → 特に NodeList や HTMLCollection のような「複数要素を扱う場合」は、まとめて変数にしておくのがベストプラクティス！
+
+
+
+
+
+
+
+
+// 宇宙一わかりやすいJS
+// https://youtu.be/ZE484EEuQ8k?si=qE-_dh3BZNDctbmq
+///<!--2:08:03～-->
+
+
+////空っぽのHTMLクラス(.timeline)にappendChildで情報を持った変数($post)を入れ込む。
+//↓↓↓ DOM用（HTMLのクラス用）の情報（タグの種類、クラス、クラス名、文章"おなか減ったなう"）を入れる
+const $post = document.createElement("article"); //createElementでDOM用のHTMLタグを生成する。（今回は引数どおりのarticleタグを生成する。）
+$post.setAttribute("class", "post"); //上記の変数$post"articleタグ"にDOM用の"クラス"（第一引数）を付与し、DOM用の"post"（第二引数）というクラス名をつける。
+$post.innerText = "お腹減ったなう。(←空っぽのhtmlの.timelineクラスにappendChildで情報を持った変数$postを入れ込む。)"; //上記の変数$postに文章"おなか減ったなう"を付け足す。
+//↓↓↓ HTMLからtimelineクラス（この段階ではまだ情報は空っぽ）を取得し、上記の$postの情報を入れる。
+const $timeline = document.querySelectorAll(".timeline")[0]; //querySelectorAllでHTMLに記述した.timeline(引数)クラス（※ドット忘れずに）の[]番目を取得する。
+$timeline.appendChild($post); //空っぽの変数$timelineにappendChildでクラスの情報$post(引数)を入れる。
+
+
+
+
+///<!--2:10:00～-->
+///イベント
+// window（webページ全体に対して）、document（個々のHTML要素に対して）
+
+// ↓↓↓リロードしたタイミング（load）で、警告を出す関数（alert）を実行するイベント。
+window.addEventListener("load", function () {
+  ///addEventListener第一引数（イベントのタイプ）、第二引数（イベント時に実行する関数）
+  alert("読み込み完了");
+});
+
+/// あるidに対してボタンを押すと"クリックされた！"がコンソール出力されるイベントを設定する。
+document.querySelector("#button").addEventListener("click", function () {
+  ///querySelectorでHTMLのid="button"を取得する。
+  console.log("クリックされた！"); ///addEventListenerでイベントを設定する。
+});
+
+// <!--2:13:45～-->
+// Q.ボタンを押したら画面に"ピカチュウ"が表示されるプログラムを書いてください。
+// 空っぽのHTMLのid(output)にJSのDOM操作innerTextで"ピカチュウ！"を入れ込む
+// JSのクリックイベント用のボタンタグとクラスを作る(id=button22)
+document.querySelector("#button22").addEventListener("click", function () {
+    document.querySelector("#output").innerText = "ピカチュウ";
+});
+
+
+// <!--2:15:45～-->
+// Q.ボタンを押したら20%の確率で「ピカチュウをゲットした！」、
+// 80%の確立で「ざんねん！もう少しでつかまえられたのに！」と
+// ダイアログで表示するプログラムを書きなさい
+
+//ランダムな数字を生成して確率ゲームを作る。
+//ボタンをクリックすると確率ゲームを発生させるイベントを作る。
+document.querySelector("#button33").addEventListener("click", function () {//HTMLで作っておいたボタンのid=button33を取得する。
+    if(Math.random() <= 0.2){//20%以下かどうか。Math.random()は1以下の数字「0～0.999999…」をランダムに生成する。
+        alert("「ピカチュウをゲットした！」") ;//当てはまる場合（20%）return
+    }else {//当てはまらない場合（80%）
+        alert("「ざんねん！もう少しでつかまえられたのに！」");
+    }
+});
+
+
+// <!--2:21:10～-->
+//デバッグ
+//
+const getInitialname = (name) => {//引数nameに姓名（半角区切り）を渡すとイニシャルが返ってくる関数
+    const nameArray = name.split(" ");//※ ←(" ")の間は半角で区切る！変数nameArray。splitメソッドで引数の値"Yamada Hiroki"を分割する。
+    console.log("nameArray:" , nameArray);
+    const initialLast = nameArray[0].slice(0,1);//変数initialLast。上記の値を配列の[0]番目としてsliceメソッドで抽出する。引数（姓）
+    console.log("initialLast:", initialLast);
+    const initialFirst = nameArray[1].slice(0,1);//引数（名）
+    console.log("initialFirst:", initialFirst);
+    return initialLast + "." + initialFirst;
+}
+
+const result55 = getInitialname("Yamada Hiroki");//今回引数nameの値は"Yamada Hiroki"。返ってくる期待の値はイニシャルの"Y.H"
+console.log(result55);
+

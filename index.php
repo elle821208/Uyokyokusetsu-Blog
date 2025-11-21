@@ -27,10 +27,10 @@ get_header();
             <div class="grid-articles">
                 <?php
                 // 「zakki」というカテゴリ名がついた記事だけを取得します。
-                // ここで「新しい記事5件だけ」を選んで表示しています。
+                // ここで「新しい記事6件だけ」を選んで表示しています。
                 $zakki_query = new WP_Query(array(
                     'category_name' => 'zakki',
-                    'posts_per_page' => 5
+                    'posts_per_page' => 6
                 ));
 
                 // 記事が1件でもあれば表示スタート
@@ -44,7 +44,7 @@ get_header();
                             <?php else : // 画像がないときは代わりの画像を表示 ?>
                                 <figure>
                                     <p class="nothing">
-                                        <img src="<?php echo get_template_directory_uri(); ?>/img/shitugen_tozando.jpg" alt="">
+                                        <img src="<?php echo get_template_directory_uri(); ?>/img/no-thumbnail-uyokyokusetsu.png" alt="">
                                     </p>
                                 </figure>
                             <?php endif; ?>
@@ -75,10 +75,10 @@ get_header();
                 // 今何ページ目かを取得（たとえば2ページ目、3ページ目…と続けられるように）
                 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
-                // ▼【1】「tech」というカテゴリ名がついた、普通の投稿を最大5件取得します
+                // ▼【1】「tech」というカテゴリ名がついた、普通の投稿を最大2件取得します
                 $tech_posts = new WP_Query(array(
                     'category_name' => 'tech',
-                    'posts_per_page' => 5
+                    'posts_per_page' => 2
                 ));
 
                 if ($tech_posts->have_posts()) :
@@ -89,7 +89,7 @@ get_header();
                                 <figure><?php the_post_thumbnail('post-thumbnails'); ?></figure>
                             <?php else: ?>
                                 <figure class="nothing">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/img/shitugen_tozando.jpg" alt="">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/img/no-thumbnail-uyokyokusetsu.png" alt="">
                                 </figure>
                             <?php endif; ?>
                             <p class="post-date"><?php echo get_the_date(); ?></p>
@@ -101,12 +101,12 @@ get_header();
                     wp_reset_postdata();
                 endif;
 
-                // ▼【2】カスタム投稿タイプ「tech」から記事を最大5件取得
+                // ▼【2】カスタム投稿タイプ「tech」から記事を最大2件取得
                 // カスタム投稿タイプとは、「通常のブログ記事とは別の種類の投稿」のこと。
                 // 商品紹介、作品ギャラリーなど、使い分けたいときに使います。
                 $args = array(
                     'post_type' => 'tech',
-                    'posts_per_page' => 5,
+                    'posts_per_page' => 2,
                     'paged' => $paged
                 );
                 $the_query = new WP_Query($args);
@@ -118,7 +118,7 @@ get_header();
                                 <figure><?php the_post_thumbnail('post-thumbnails'); ?></figure>
                             <?php else: ?>
                                 <figure class="nothing">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/img/tsukitotoukyoutawa.png" alt="">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/img/no-thumbnail-uyokyokusetsu.png" alt="">
                                 </figure>
                             <?php endif; ?>
                             <p class="post-date"><?php echo get_the_date(); ?></p>
@@ -130,10 +130,10 @@ get_header();
                     wp_reset_postdata();
                 endif;
 
-                // ▼【3】カスタム投稿タイプ「works」から記事を最大5件取得
+                // ▼【3】カスタム投稿タイプ「works」から記事を最大2件取得
                 $args_works = array(
                     'post_type' => 'works',
-                    'posts_per_page' => 5,
+                    'posts_per_page' => 2,
                     'paged' => $paged
                 );
                 $works_query = new WP_Query($args_works);
@@ -145,7 +145,7 @@ get_header();
                                 <figure><?php the_post_thumbnail('post-thumbnails'); ?></figure>
                             <?php else : ?>
                                 <figure class="nothing">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/img/tsukitotoukyoutawa.png" alt="">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/img/no-thumbnail-uyokyokusetsu.png" alt="">
                                 </figure>
                             <?php endif; ?>
                             <p class="post-date"><?php echo get_the_date(); ?></p>

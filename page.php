@@ -1,18 +1,18 @@
+<?php get_header(); ?>
 
-
-<!--↓wpの固定ページ（page.phpで読み込む）-->
-<?php get_header();/*これでヘッダーを読み込む*/?>
 <main>
-    <h1><?php the_title();?></h1><!--wpの固定ページのタイトルを読み込む-->
-    <?php the_content(); ?><!--wpの固定ページの中身を読み込む-->
+    <section class="post-content">
+        <h1 class="entry-title"><?php the_title(); ?></h1>
+        <?php
+        while ( have_posts() ) :
+            the_post();
+            the_content();
+        endwhile;
+        ?>
+    </section>
+
+    <!-- 共通のCTAを呼び出し（必要な場合） -->
+    <?php get_template_part('template-parts/content', 'cta'); ?>
 </main>
-<div class="add">
-    （↓↓↓page.phpで作った文章。）
-    <br>ここに広告を入れる予定です。
-    <br>ここに広告を入れる予定です。
-    <br>ここに広告を入れる予定です。
-    <br>ここに広告を入れる予定です。
-    <br>ここに広告を入れる予定です。
-    <br>ここに広告を入れる予定です。
-</div>
-<?php get_footer();/*これでフッターを読み込む*/ ?>  
+
+<?php get_footer(); ?>
