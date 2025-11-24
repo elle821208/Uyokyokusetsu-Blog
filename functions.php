@@ -226,6 +226,19 @@ add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
 
 
 
+
+// ==============================
+// ダッシュボードに警告表示
+// ==============================  
+add_action('admin_notices', function() {
+    echo '<div style="padding:10px; background:#ff4444; color:#fff; font-size:18px; font-weight:bold; text-align:center;">
+    🔴 これは【本番環境】です！ 操作に注意してください
+    </div>';
+});
+
+
+
+
 // ==============================
 // ダークモード＆季節判定 JS を全ページで読み込み
 // ==============================       
