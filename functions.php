@@ -230,7 +230,6 @@ add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
 // ==============================
 // ダッシュボードに警告表示
 // ==============================  
-<?php
 // 環境を判別する定数を設定（LocalWP なら 'local', 本番なら 'production'）
 if ( !defined('WP_ENV') ) {
     // サーバーごとに条件を分ける
