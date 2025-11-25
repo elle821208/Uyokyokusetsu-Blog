@@ -230,11 +230,34 @@ add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
 // ==============================
 // ダッシュボードに警告表示
 // ==============================  
-add_action('admin_notices', function() {
-    echo '<div style="padding:10px; background:#ff4444; color:#fff; font-size:18px; font-weight:bold; text-align:center;">
-    🔴 これは【本番環境】です！ 操作に注意してください
-    </div>';
-});
+<?php
+// 環境を判別する定数を設定（LocalWP なら 'local', 本番なら 'production'）
+if ( !defined('WP_ENV') ) {
+    // サーバーごとに条件を分ける
+    if ( strpos($_SERVER['HTTP_HOST'], 'localhost') !== false || strpos($_SERVER['HTTP_HOST'], '.local') !== false ) {
+        define('WP_ENV', 'local');
+    } else {
+        define('WP_ENV', 'production');
+    }
+}
+
+// 本番環境だけ警告文を表示
+if ( WP_ENV === 'production' ) {
+    add_action('admin_notices', function() {
+        echo '<div style="padding:10px; background:#ff4444; color:#fff; font-size:18px; font-weight:bold; text-align:center;">
+        🔴 これは【本番環境】です！ 操作に注意してください
+        </div>';
+    });
+}
+
+// ローカル環境だけ表示する例（必要なら）
+if ( WP_ENV === 'local' ) {
+    add_action('admin_notices', function() {
+        echo '<div style="padding:10px; background:#2277ff; color:#fff; font-size:18px; font-weight:bold; text-align:center;">
+        🔵 これは【ローカル環境】です
+        </div>';
+    });
+}
 
 
 
