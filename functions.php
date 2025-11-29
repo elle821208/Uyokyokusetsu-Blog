@@ -199,35 +199,6 @@ add_action('wp_enqueue_scripts', 'uyokyokusetsu_enqueue_copy_code_assets');
 
 
 // ==============================
-// 学習用 JavaScript ファイル群
-// ==============================
-function my_enqueue_scripts() {
-    wp_enqueue_script('tetsu-basics',
-        get_template_directory_uri() . '/Tetsu-Js-Study/basics.js',
-        array(), '1.0', true);
-
-    wp_enqueue_script('tetsu-functions',
-        get_template_directory_uri() . '/Tetsu-Js-Study/functions.js',
-        array(), '1.0', true);
-
-    wp_enqueue_script('tetsu-arrays-loops',
-        get_template_directory_uri() . '/Tetsu-Js-Study/arraysAndLoops.js',
-        array(), '1.0', true);
-
-    wp_enqueue_script('tetsu-objects-builtins', 
-        get_template_directory_uri() . '/Tetsu-Js-Study/objectsAndBuiltIns.js',
-        array(), '1.0', true);
-
-    wp_enqueue_script('tetsu-dom-browser',
-        get_template_directory_uri() . '/Tetsu-Js-Study/domAndBrowser.js',
-        array(), '1.0', true);
-}
-add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
-
-
-
-
-// ==============================
 // ダッシュボードに警告表示
 // ==============================  
 // 環境を判別する定数を設定（LocalWP なら 'local', 本番なら 'production'）
@@ -260,20 +231,67 @@ if ( WP_ENV === 'local' ) {
 
 
 
+// resposive.css スマホ対応（レスポンシブデザイン）専用の CSS
+wp_enqueue_style(
+  'responsive',
+  get_template_directory_uri() . '/css/responsive.css',
+  array('style'),
+  '1.0.0'
+);
 
-// ==============================
-// ダークモード＆季節判定 JS を全ページで読み込み
-// ==============================       
-function enqueue_darkmode_season_script() {
-    wp_enqueue_script(
-        'darkmode-season',
-        get_template_directory_uri() . '/Tetsu-Js-Study/darkmode-season.js', // ← フォルダ構成に合わせたパス
-        array(), // 依存スクリプトなし
-        null,    // バージョン番号（キャッシュ防止したいときは time() にすると便利）
-        true     // フッターで読み込む（高速化）
-    );
-}
-add_action('wp_enqueue_scripts', 'enqueue_darkmode_season_script');
+
+
+
+//includes(functions.phpの記載を分担させるための、php機能ファイルの入ったフォルダ)を読み込む
+require_once get_template_directory() . '/includes/enqueue.php';
+require_once get_template_directory() . '/includes/theme-setup.php';
+
+
+
+
+
+
+// // ==============================
+// // 学習用 JavaScript ファイル群
+// // ==============================
+// function my_enqueue_scripts() {
+//     wp_enqueue_script('tetsu-basics',
+//         get_template_directory_uri() . '/Tetsu-Js-Study/basics.js',
+//         array(), '1.0', true);
+
+//     wp_enqueue_script('tetsu-functions',
+//         get_template_directory_uri() . '/Tetsu-Js-Study/functions.js',
+//         array(), '1.0', true);
+
+//     wp_enqueue_script('tetsu-arrays-loops',
+//         get_template_directory_uri() . '/Tetsu-Js-Study/arraysAndLoops.js',
+//         array(), '1.0', true);
+
+//     wp_enqueue_script('tetsu-objects-builtins', 
+//         get_template_directory_uri() . '/Tetsu-Js-Study/objectsAndBuiltIns.js',
+//         array(), '1.0', true);
+
+//     wp_enqueue_script('tetsu-dom-browser',
+//         get_template_directory_uri() . '/Tetsu-Js-Study/domAndBrowser.js',
+//         array(), '1.0', true);
+// }
+// add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
+
+
+
+// // ==============================
+// // ダークモード＆季節判定 JS を全ページで読み込み
+// // ==============================       
+// function enqueue_darkmode_season_script() {
+//     wp_enqueue_script(
+//         'darkmode-season',
+//         get_template_directory_uri() . '/Tetsu-Js-Study/darkmode-season.js', // ← フォルダ構成に合わせたパス
+//         array(), // 依存スクリプトなし
+//         null,    // バージョン番号（キャッシュ防止したいときは time() にすると便利）
+//         true     // フッターで読み込む（高速化）
+//     );
+// }
+// add_action('wp_enqueue_scripts', 'enqueue_darkmode_season_script');
 
 
 
