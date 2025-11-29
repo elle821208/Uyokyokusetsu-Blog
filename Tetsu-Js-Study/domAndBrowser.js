@@ -13,7 +13,7 @@
 
 
 //お試しアラート
-alert("uyokyokusetsu-blog-local (ローカル環境)→ Uyokyokusetsu-blog-dev (ローカル環境のテーマ)"
+alert("uyokyokusetsu-blog-dev (ローカル環境のテーマ)"
   +"Tetsu-Js-Study/domAndBrowser.jsの文頭に記載 → "
   + "shift+F10でFiveserver、liveserverを使い表示した。"
   +" Tetsu-Js-Study/index.html"
