@@ -251,6 +251,57 @@ require_once get_template_directory() . '/includes/theme-setup.php';
 
 
 
+// 投稿一覧に「完成・途中・放置」の状態タグをカラー付きで表示
+function tetsu_custom_post_state_tags($states, $post) {
+
+    // 投稿ステータスを取得
+    $status = get_post_status($post->ID);
+
+    // デフォルトタグを一回クリア（純粋に見やすくするため）
+    $states = array();
+
+    // カラータグの定義
+    $labels = array(
+        'complete' => '<span style="color:#28a745; font-weight:bold;">🟩 完成（公開可能）</span>',
+        'progress' => '<span style="color:#f0ad4e; font-weight:bold;">🟨 途中（書きかけ）</span>',
+        'paused'   => '<span style="color:#d9534f; font-weight:bold;">🟥 放置（優先度低）</span>',
+    );
+
+    // ステータス別に割り当て（あなたの要望どおり）
+    switch ($status) {
+
+        case 'publish':
+            // 完成（公開可能）
+            $states[] = $labels['complete'];
+            break;
+
+        case 'draft':
+        case 'pending':
+            // 途中（書きかけ）
+            $states[] = $labels['progress'];
+            break;
+
+        case 'private':
+            // 放置（優先度低）
+            $states[] = $labels['paused'];
+            break;
+
+        default:
+            // パスワード保護（公開していないので放置扱い）
+            if (!empty($post->post_password)) {
+                $states[] = $labels['paused'];
+            }
+            break;
+    }
+
+    return $states;
+}
+add_filter('display_post_states', 'tetsu_custom_post_state_tags', 10, 2);
+
+
+
+
+
 // // ==============================
 // // 学習用 JavaScript ファイル群
 // // ==============================
