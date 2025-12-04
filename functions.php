@@ -302,6 +302,62 @@ add_filter('display_post_states', 'tetsu_custom_post_state_tags', 10, 2);
 
 
 
+
+// ダッシュボードに運用ルールメモ（作業順付き）を追加
+function tetsu_add_dashboard_widget() {
+    wp_add_dashboard_widget(
+        'tetsu_rules_widget',
+        '📝 ブログ運用ルール（完成・途中・放置＋作業順）',
+        'tetsu_dashboard_rules_display'
+    );
+}
+add_action('wp_dashboard_setup', 'tetsu_add_dashboard_widget');
+
+function tetsu_dashboard_rules_display() {
+    echo '
+        <div style="font-size:15px; line-height:1.8;">
+
+            <h2 style="margin-bottom:10px;">📌 作業の順番（連番）</h2>
+            <ol style="margin-bottom:25px;">
+                <li><strong>🟨 途中（書きかけ）記事を進める</strong><br>
+                    毎日まずここから。書きかけを1つでも「完成」へ近づける。</li>
+                <li><strong>🟩 完成（公開可能）を本番へ反映</strong><br>
+                    読み直してOKなら公開して成果を出す。</li>
+                <li><strong>🟥 放置（優先度低）をチェック</strong><br>
+                    やる気がある日に回収。やらなくてもOK。</li>
+            </ol>
+
+            <h3>🟩 完成（公開可能）【作業順：2】</h3>
+            <ul>
+                <li>本番へ反映する候補</li>
+                <li>読み直してOKの状態</li>
+                <li><strong>WordPress状態：公開（publish）</strong></li>
+            </ul>
+
+            <h3>🟨 途中（書きかけ）【作業順：1】</h3>
+            <ul>
+                <li>構成がまだ完成していない</li>
+                <li>図解・画像が足りない</li>
+                <li>リライト待ち</li>
+                <li><strong>WordPress状態：下書き（draft）</strong></li>
+            </ul>
+
+            <h3>🟥 放置（優先度低）【作業順：3】</h3>
+            <ul>
+                <li>アイデアだけ</li>
+                <li>いつ書くかわからない</li>
+                <li>下書きの下書き</li>
+                <li><strong>WordPress状態：非公開（private）</strong></li>
+            </ul>
+
+        </div>
+    ';
+}
+
+
+
+
+
 // // ==============================
 // // 学習用 JavaScript ファイル群
 // // ==============================
