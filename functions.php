@@ -197,6 +197,33 @@ add_action('wp_enqueue_scripts', 'uyokyokusetsu_enqueue_copy_code_assets');
 
 
 
+// ==============================
+// resposive.css スマホ対応（レスポンシブデザイン）専用の CSS
+// ==============================
+wp_enqueue_style(
+  'responsive',
+  get_template_directory_uri() . '/css/responsive.css',
+  array('style'),
+  '1.0.0'
+);
+
+
+
+// ==============================
+//includes(functions.phpの記載を分担させるための、php機能ファイルの入ったフォルダ)を読み込む
+// ==============================
+require_once get_template_directory() . '/includes/enqueue.php';
+require_once get_template_directory() . '/includes/theme-setup.php';
+
+
+
+
+
+
+
+
+
+
 
 // ==============================
 // ダッシュボードに警告表示
@@ -231,27 +258,10 @@ if ( WP_ENV === 'local' ) {
 
 
 
-// resposive.css スマホ対応（レスポンシブデザイン）専用の CSS
-wp_enqueue_style(
-  'responsive',
-  get_template_directory_uri() . '/css/responsive.css',
-  array('style'),
-  '1.0.0'
-);
 
-
-
-
-//includes(functions.phpの記載を分担させるための、php機能ファイルの入ったフォルダ)を読み込む
-require_once get_template_directory() . '/includes/enqueue.php';
-require_once get_template_directory() . '/includes/theme-setup.php';
-
-
-
-
-
-
+// ==============================
 // 投稿一覧に「完成・途中・放置」の状態タグをカラー付きで表示
+// ==============================
 function tetsu_custom_post_state_tags($states, $post) {
 
     // 投稿ステータスを取得
@@ -302,8 +312,9 @@ add_filter('display_post_states', 'tetsu_custom_post_state_tags', 10, 2);
 
 
 
-
+// ==============================
 // ダッシュボードに運用ルールメモ（作業順付き）を追加
+// ==============================
 function tetsu_add_dashboard_widget() {
     wp_add_dashboard_widget(
         'tetsu_rules_widget',
