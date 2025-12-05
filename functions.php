@@ -224,6 +224,8 @@ require_once get_template_directory() . '/includes/theme-setup.php';
 
 
 
+
+
 /* ======================================================
    ▼ 1. 環境判別（本番 / ローカル）
 ====================================================== */
@@ -245,18 +247,12 @@ if ( !defined('WP_ENV') ) {
 function tetsu_admin_env_style() {
 
     if (WP_ENV === 'local') {
-        // ローカル → 青背景
         echo '<style>
-            body.wp-admin {
-                background: #e3f0ff !important;
-            }
+            body.wp-admin { background: #e3f0ff !important; }
         </style>';
     } else {
-        // 本番 → 赤背景
         echo '<style>
-            body.wp-admin {
-                background: #ffe5e5 !important;
-            }
+            body.wp-admin { background: #ffe5e5 !important; }
         </style>';
     }
 }
@@ -284,11 +280,12 @@ add_action('admin_notices', function() {
 
 
 /* ======================================================
-   ▼ 4. ローカル環境だけ WEBサイトに警告バナー
+   ▼ 4. ローカル環境だけ WEBサイトに警告バナー（ヘッダー固定）
 ====================================================== */
 function tetsu_local_front_notice() {
     if (WP_ENV === 'local') {
 
+        // ヘッダー固定バナー
         echo '
         <div style="
             width:100%;
@@ -306,11 +303,46 @@ function tetsu_local_front_notice() {
         </div>';
 
         // バナーの高さ分だけ余白
-        echo '<style> body { margin-top:50px !important; } </style>';
+        echo '<style>
+            body { margin-top:50px !important; }
+        </style>';
     }
 }
 add_action('wp_head', 'tetsu_local_front_notice');
 
+
+/* ======================================================
+   ▼ 4-2. LocalWP だけ WEBサイトのフッターにも警告バナー追加
+====================================================== */
+add_action('wp_footer', function() {
+    if (WP_ENV === 'local') {
+        echo '
+        <div style="
+            width:100%;
+            background:#1133aa;
+            color:white;
+            padding:12px;
+            text-align:center;
+            font-size:16px;
+            font-weight:bold;
+            margin-top:20px;
+        ">
+            🔵【ローカル環境】これは開発用サイトです
+        </div>';
+    }
+});
+
+
+/* ======================================================
+   ▼ 4-3. LocalWP のサイト背景色を変更
+====================================================== */
+add_action('wp_head', function() {
+    if (WP_ENV === 'local') {
+        echo '<style>
+            body { background:#fffbe6 !important; }
+        </style>';
+    }
+});
 
 
 /* ======================================================
@@ -318,13 +350,11 @@ add_action('wp_head', 'tetsu_local_front_notice');
 ====================================================== */
 function tetsu_custom_post_state_tags($states, $post) {
 
-    // WordPress投稿ステータス取得
     $status = get_post_status($post->ID);
 
-    // 見やすいよう一度クリア
+    // 一度クリア
     $states = array();
 
-    // カラータグ
     $labels = array(
         'complete' => '<span style="color:#28a745; font-weight:bold;">🟩 完成（公開可能）</span>',
         'progress' => '<span style="color:#f0ad4e; font-weight:bold;">🟨 途中（書きかけ）</span>',
@@ -332,7 +362,6 @@ function tetsu_custom_post_state_tags($states, $post) {
     );
 
     switch ($status) {
-
         case 'publish':
             $states[] = $labels['complete'];
             break;
@@ -411,6 +440,11 @@ function tetsu_dashboard_rules_display() {
         </div>
     ';
 }
+
+
+
+
+
 
 
 
